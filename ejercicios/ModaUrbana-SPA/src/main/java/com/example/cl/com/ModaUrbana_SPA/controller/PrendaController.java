@@ -5,21 +5,14 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.example.cl.com.ModaUrbana_SPA.model.*;
+import com.example.cl.com.ModaUrbana_SPA.model.Prenda;
+import com.example.cl.com.ModaUrbana_SPA.service.PrendaService;
 
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/prendas")
 public class PrendaController {
 
     @Autowired
@@ -27,8 +20,9 @@ public class PrendaController {
 
     // Metodo Get
     @GetMapping
-    public ResponseEntity<list<Prenda>> listar() {
+    public ResponseEntity<List<Prenda>> listar() {
         List<Prenda> prendas = prendaService.fetchAll();
+
         if (prendas.isEmpty()) {
             return ResponseEntity.notFound().build();
         }
@@ -36,9 +30,9 @@ public class PrendaController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Prenda> buscar(@PathVariable Integer id) {
+    public ResponseEntity<Prenda> buscar(@PathVariable Long id) {
         Prenda prenda = prendaService.fetchById(id);
-        return ResponseEntity.ok(prenda)
+        return ResponseEntity.ok(prenda);
     }
 
     @PostMapping
@@ -48,7 +42,7 @@ public class PrendaController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Prenda> actualizar(@PathVariable Integer id, @RequestBody Prenda prenda) {
+    public ResponseEntity<Prenda> actualizar(@PathVariable Long id, @RequestBody Prenda prenda) {
         Prenda existente = prendaService.fetchById(id);
 
         existente.setNombre(prenda.getNombre());
@@ -62,7 +56,7 @@ public class PrendaController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<?> eliminar(@PathVariable Integer id) {
+    public ResponseEntity<?> eliminar(@PathVariable Long id) {
         prendaService.delete(id);
         return ResponseEntity.noContent().build();
     }

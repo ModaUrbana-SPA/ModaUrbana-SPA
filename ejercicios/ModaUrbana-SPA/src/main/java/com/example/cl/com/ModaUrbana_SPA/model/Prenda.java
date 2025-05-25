@@ -6,7 +6,7 @@ import jakarta.persistence.Table;
 import lombok.*;
 
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
-@DiscriminatorColumn(name = "tipo", discriminatorType = DiscriminatorType.STRING)
+@DiscriminatorColumn(name = "tipo_prenda")
 @Entity
 // lombok
 @Data
@@ -14,7 +14,7 @@ import lombok.*;
 @AllArgsConstructor
 // DATA
 @Table(name = "PRENDA")
-public class Prenda {
+public abstract class Prenda {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;

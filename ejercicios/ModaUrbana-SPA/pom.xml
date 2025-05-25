@@ -30,7 +30,7 @@
 		<java.version>17</java.version>
 	</properties>
 <dependencies>
-    <!-- Spring Web y JPA -->
+    <!-- Spring Boot: Web + JPA -->
     <dependency>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-data-jpa</artifactId>
@@ -40,11 +40,33 @@
         <artifactId>spring-boot-starter-web</artifactId>
     </dependency>
 
-    <!-- Conector Oracle -->
+    <repository>
+        <id>oracle</id>
+        <name>Oracle Maven Repository</name>
+        <url>https://maven.oracle.com</url>
+    </repository>
+    <!-- Oracle JDBC Driver (ojdbc11 recomendado para Java 11+ y Oracle ATP) -->
     <dependency>
         <groupId>com.oracle.database.jdbc</groupId>
         <artifactId>ojdbc11</artifactId>
-        <scope>runtime</scope>
+        <version>21.9.0.0</version>
+    </dependency>
+
+    <!-- Librerías de seguridad requeridas para conexión TCPS (ATP) -->
+    <dependency>
+        <groupId>com.oracle.database.security</groupId>
+        <artifactId>oraclepki</artifactId>
+        <version>21.9.0.0</version>
+    </dependency>
+    <dependency>
+        <groupId>com.oracle.database.security</groupId>
+        <artifactId>osdt_core</artifactId>
+        <version>21.9.0.0</version>
+    </dependency>
+    <dependency>
+        <groupId>com.oracle.database.security</groupId>
+        <artifactId>osdt_cert</artifactId>
+        <version>21.9.0.0</version>
     </dependency>
 
     <!-- Lombok -->
@@ -54,26 +76,25 @@
         <optional>true</optional>
     </dependency>
 
-    <!-- Kafka Producer/Consumer -->
+    <!-- Kafka -->
     <dependency>
         <groupId>org.springframework.kafka</groupId>
         <artifactId>spring-kafka</artifactId>
     </dependency>
 
-    <!-- Test -->
+    <!-- Tests -->
     <dependency>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-test</artifactId>
         <scope>test</scope>
     </dependency>
-    
-    <!-- Kafka Test (opcional) -->
     <dependency>
         <groupId>org.springframework.kafka</groupId>
         <artifactId>spring-kafka-test</artifactId>
         <scope>test</scope>
     </dependency>
 </dependencies>
+
 
 
 	<build>
