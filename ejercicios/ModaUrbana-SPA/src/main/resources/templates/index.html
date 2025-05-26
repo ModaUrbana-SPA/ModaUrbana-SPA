@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <!-- Metadatos -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Moda Urbana: Ropa moderna y de calidad para todos los estilos.">
+    <meta name="keywords" content="moda, ropa, tienda, estilo, urbana">
+    <meta name="author" content="Moda Urbana">
+    <title>Moda Urbana</title>
+    <!-- Estilos y fuentes -->
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+
+<body>
+    <!-- Encabezado -->
+    <header>
+        <nav class="fade-in">
+            <h1>Moda Urbana</h1>
+            <ul>
+                <li><a href="#home">Inicio</a></li>
+                <li><a href="#about">Sobre nosotros</a></li>
+                <li><a href="#shop">Tienda</a></li>
+                <li><a href="#contact">Contacto</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Slider de imágenes -->
+    <div class="slider">
+        <img src="slider4.jpg" alt="Imagen 1" class="active">
+        <img src="slider3.jpg" alt="Imagen 2">
+        <img src="slider5.png" alt="Imagen 3">
+    </div>
+
+    <!-- Banner promocional -->
+    <section class="container fade-in"
+        style="background: #ffcc00; color: #1e0030; padding: 1.5rem; border-radius: 8px;">
+        <h2>¡Rebajas de temporada!</h2>
+        <p>Descubre descuentos de hasta el 50% en nuestra colección de invierno.</p>
+    </section>
+
+    <!-- Sección "Sobre nosotros" -->
+    <section id="about" class="container fade-in">
+        <h2><i class="fas fa-store"></i> Sobre nosotros</h2>
+        <p>Moda Urbana es una tienda dedicada a ofrecer ropa moderna y de calidad para todos los estilos.</p>
+    </section>
+
+    <!-- Productos destacados -->
+    <section id="featured" class="container fade-in">
+        <h2><i class="fas fa-star"></i> Productos destacados</h2>
+        <div class="product">
+            <img src="slider3.jpg" alt="Producto 3" class="pulse">
+            <p>Producto 3</p>
+        </div>
+        <div class="product">
+            <img src="slider4.jpg" alt="Producto 4" class="pulse">
+            <p>Producto 4</p>
+        </div>
+    </section>
+
+    <!-- Tienda -->
+    <section id="shop" class="container fade-in">
+        <h2><i class="fas fa-shopping-bag"></i> Tienda</h2>
+        <div class="product">
+            <img src="producto1.png" alt="Producto 1" class="pulse">
+            <p>Producto 1</p>
+        </div>
+        <div class="product">
+            <img src="producto2.avif" alt="Producto 2" class="pulse">
+            <p>Producto 2</p>
+        </div>
+    </section>
+
+    <!-- Contacto -->
+    <section id="contact" class="container fade-in">
+        <h2><i class="fas fa-envelope"></i> Contacto</h2>
+        <form action="https://example.com/send" method="POST">
+            <label for="name"><i class="fas fa-user"></i> Nombre:</label>
+            <input type="text" id="name" name="name" required>
+
+            <label for="email"><i class="fas fa-envelope"></i> Correo electrónico:</label>
+            <input type="email" id="email" name="email" required>
+
+            <label for="message"><i class="fas fa-comment"></i> Mensaje:</label>
+            <textarea id="message" name="message" rows="4" required></textarea>
+
+            <button type="submit" class="glow-btn"><i class="fas fa-paper-plane"></i> Enviar</button>
+        </form>
+    </section>
+
+    <!-- Pie de página -->
+    <footer>
+        <p>&copy; 2025 Moda Urbana. Todos los derechos reservados.</p>
+        <div>
+            <a href="https://facebook.com" target="_blank"><i class="fab fa-facebook"></i></a>
+            <a href="https://instagram.com" target="_blank"><i class="fab fa-instagram"></i></a>
+            <a href="https://twitter.com" target="_blank"><i class="fab fa-twitter"></i></a>
+        </div>
+    </footer>
+    <script src="script.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,401 @@
+/* Estilos generales */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background: linear-gradient(135deg, #f4f4f4, #e0e0e0); /* Fondo degradado */
+    color: #333; /* Color de texto principal */
+    animation: urbanEntrance 1.5s ease-out; /* Animación de entrada */
+}
+
+/* Animación de entrada para el cuerpo */
+@keyframes urbanEntrance {
+    0% {
+        opacity: 0;
+        transform: scale(0.9) translateY(50px);
+        background: linear-gradient(135deg, #333, #000);
+    }
+    50% {
+        opacity: 0.5;
+        transform: scale(1.05) translateY(0);
+        background: linear-gradient(135deg, #444, #111);
+    }
+    100% {
+        opacity: 1;
+        transform: scale(1) translateY(0);
+        background: linear-gradient(135deg, #f4f4f4, #e0e0e0);
+    }
+}
+
+/* Estilos del encabezado */
+header {
+    background-color: #1e0030; /* Fondo oscuro */
+    color: #fff; /* Texto blanco */
+    padding: 1rem 0;
+    text-align: center;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Sombra */
+}
+
+header h1 {
+    margin: 0;
+    font-size: 2rem;
+}
+
+/* Estilos de navegación */
+nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 1rem;
+    background-color: #1e0030;
+}
+
+nav ul {
+    list-style: none;
+    display: flex;
+    margin: 0;
+    padding: 0;
+}
+
+nav ul li {
+    margin: 0 1rem;
+}
+
+nav ul li a {
+    color: #fff;
+    text-decoration: none;
+    font-weight: bold;
+    position: relative;
+    transition: color 0.3s ease;
+}
+
+nav ul li a::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 2px;
+    background-color: #ffcc00;
+    left: 0;
+    bottom: -5px;
+    transition: width 0.3s ease;
+}
+
+nav ul li a:hover {
+    color: #ffcc00;
+}
+
+nav ul li a:hover::after {
+    width: 100%; /* Subrayado al pasar el mouse */
+}
+
+/* Contenedor principal */
+.container {
+    max-width: 1200px;
+    margin: 2rem auto;
+    padding: 0 1rem;
+    text-align: center;
+    opacity: 0;
+    transform: translateX(-50px);
+    animation: slideIn 1s ease forwards; /* Animación de entrada */
+}
+
+/* Animación de entrada para contenedores */
+@keyframes slideIn {
+    from {
+        opacity: 0;
+        transform: translateX(-50px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+/* Estilos de las secciones */
+section {
+    margin: 2rem 0;
+    padding: 1rem;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Sombra */
+}
+
+/* Estilos de formularios */
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+form input, form textarea, form button {
+    width: 100%;
+    padding: 0.5rem;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+form input:focus, form textarea:focus {
+    border-color: #ffcc00;
+    box-shadow: 0 0 5px rgba(255, 204, 0, 0.5);
+    outline: none;
+    transition: box-shadow 0.3s ease;
+}
+
+form button {
+    background-color: #1e0030;
+    color: #fff;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+form button:hover {
+    background-color: #ffcc00; /* Cambio de color al pasar el mouse */
+    transform: scale(1.05); /* Efecto de escala */
+    animation: bounce 0.5s ease;
+    box-shadow: 0 6px 12px rgba(255, 204, 0, 0.4);
+}
+
+/* Animación de rebote */
+@keyframes bounce {
+    0%, 100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-5px);
+    }
+}
+
+/* Estilos de imágenes */
+img {
+    width: 100%;
+    height: auto;
+    transition: transform 0.3s ease;
+    border-radius: 8px;
+}
+
+img:hover {
+    transform: scale(1.1); /* Efecto de zoom */
+}
+
+/* Estilos de productos */
+.product {
+    display: inline-block;
+    width: 45%;
+    margin: 1rem;
+    text-align: center;
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.product:hover {
+    transform: translateY(-5px); /* Efecto de elevación */
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+.product img {
+    width: 100%;
+    max-width: 300px; /* Tamaño máximo ajustado */
+    height: auto;
+    transition: transform 0.3s ease;
+    border-radius: 8px;
+}
+
+.product p {
+    font-size: 1.1rem;
+    font-weight: bold;
+    margin-top: 0.5rem;
+}
+
+/* Estilos de íconos */
+i {
+    transition: transform 0.3s ease;
+}
+
+i:hover {
+    transform: rotate(360deg);
+}
+
+/* Estilos del slider */
+.slider {
+    position: absolute;
+    width: 100%;
+    max-height: 500px;
+    overflow: hidden;
+    margin-bottom: 2rem;
+}
+
+.slider img {
+    width: 100%;
+    max-height: 500px;
+    object-fit: cover;
+    margin: 0 auto;
+    display: none;
+}
+
+.slider img.active {
+    display: block;
+    opacity: 1;
+}
+
+/* Se elimina el efecto de agrandamiento */
+.slider img:hover {
+    transform: none;
+}
+
+.slider-controls {
+    position: absolute;
+    top: 50%;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    transform: translateY(-50%);
+    pointer-events: none;
+}
+
+.slider-controls button {
+    background: rgba(0, 0, 0, 0.5);
+    border: none;
+    color: #fff;
+    font-size: 2rem;
+    padding: 0.5rem 1rem;
+    cursor: pointer;
+    pointer-events: auto;
+    transition: background 0.3s ease;
+}
+
+slider-controls button:hover {
+    background: rgba(0, 0, 0, 0.8);
+}
+
+/* Estilos del pie de página */
+footer {
+    background-color: #1e0030;
+    color: #fff;
+    text-align: center;
+    padding: 1rem 0;
+    position: relative;
+    bottom: 0;
+    width: 100%;
+    box-shadow: 0 -4px 6px rgba(0, 0, 0, 0.1);
+}
+
+footer a {
+    color: #fff;
+    font-size: 1.5rem;
+    margin: 0 0.5rem;
+    transition: transform 0.3s ease, color 0.3s ease;
+}
+
+footer a:hover {
+    transform: translateY(-5px); /* Efecto de elevación */
+    color: #ffcc00; /* Cambio de color */
+}
+
+/* Animaciones importadas */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+    100% { transform: scale(1); }
+}
+
+/* Clases animadas */
+.fade-in {
+    animation: fadeIn 1s ease forwards;
+}
+
+.pulse {
+    animation: pulse 2s infinite;
+}
+
+/* Botones con efecto glow */
+.glow-btn {
+    background: linear-gradient(45deg, #ffcc00, #ff9900);
+    color: #fff;
+    border-radius: 25px;
+    padding: 10px 20px;
+    text-transform: uppercase;
+    font-weight: bold;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.glow-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(255, 204, 0, 0.4);
+}
+
+/* Slider de imágenes */
+.slider {
+    position: relative;
+    width: 100%;
+    max-height: 500px; /* Altura máxima ajustada */
+    overflow: hidden;
+    margin-bottom: 2rem;
+}
+
+.slider img {
+    width: 100%;
+    max-height: 500px; /* Altura máxima ajustada */
+    object-fit: cover; /* Ajusta la imagen al contenedor */
+    margin: 0 auto;
+    display: none;
+}
+
+.slider img.active {
+    display: block;
+    opacity: 1;
+}
+
+/* Se elimina el efecto de agrandamiento */
+.slider img:hover {
+    transform: none;
+}
+
+.slider-controls {
+    position: absolute;
+    top: 50%;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    transform: translateY(-50%);
+    pointer-events: none;
+}
+
+.slider-controls button {
+    background: rgba(0, 0, 0, 0.5);
+    border: none;
+    color: #fff;
+    font-size: 2rem;
+    padding: 0.5rem 1rem;
+    cursor: pointer;
+    pointer-events: auto;
+    transition: background 0.3s ease;
+}
+
+slider-controls button:hover {
+    background: rgba(0, 0, 0, 0.8);
+}
+
+/* Estilos responsivos */
+@media (max-width: 768px) {
+    nav ul {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    nav ul li {
+        margin: 0.5rem 0;
+    }
+
+    .container {
+        padding: 0.5rem;
+    }
+}
