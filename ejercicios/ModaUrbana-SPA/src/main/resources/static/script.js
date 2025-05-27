@@ -6,17 +6,17 @@ document.addEventListener("DOMContentLoaded", () => {
         })
         .then(data => {
             productos = data;
-            mostrarDestacados();
-            iniciarSliderDestacados(); // 👉 Se agregó aquí
+            mostrarDestacadosSlider();
             mostrarProductos();
         })
         .catch(err => {
-            document.getElementById('productos-lista').innerHTML = `<p style="color:red;">${err.message}</p>`;
+            document.getElementById('slide-image-container').innerHTML = `<p style="color:red;">${err.message}</p>`;
         });
 });
 
 let productos = [];
 let cart = [];
+let indexSlider = 0;
 
 function mostrarProductos() {
     const contenedor = document.getElementById('productos-lista');
@@ -43,58 +43,48 @@ function mostrarProductos() {
     });
 }
 
-function mostrarDestacados() {
-    const contenedor = document.getElementById('destacados-lista');
+function mostrarDestacadosSlider() {
+    const contenedor = document.getElementById('slide-image-container');
     contenedor.innerHTML = '';
-    productos
-        .filter(p => p.destacado)
-        .forEach(prod => {
-            const div = document.createElement('div');
-            div.className = 'product';
-            div.innerHTML = `
-          <img src="${prod.imagen}" alt="${prod.nombre}">
-          <p>${prod.nombre}</p>
-          <p><strong>$${prod.precio}</strong></p>
-          <p>Talla: ${prod.talla}</p>
-          <p>Color: ${prod.color}</p>
-          <button class="add-to-cart" data-product="${prod.nombre}">Agregar al carrito</button>
-        `;
-            contenedor.appendChild(div);
-        });
 
-    document.querySelectorAll('.add-to-cart').forEach(btn => {
-        btn.addEventListener('click', () => {
-            const product = btn.getAttribute('data-product');
-            addToCart(product);
-        });
+    const destacados = productos.filter(p => p.destacado);
+
+    destacados.forEach((prod, index) => {
+        const div = document.createElement('div');
+        div.className = 'slider-item';
+        if (index === 0) div.classList.add('active');
+        div.innerHTML = `<img src="${prod.imagen}" alt="${prod.nombre}" style="cursor:pointer;" onclick="window.location.href='detalle.html?id=${prod.id}'">`;
+        contenedor.appendChild(div);
     });
+
+    iniciarSliderManual();
 }
 
-function iniciarSliderDestacados() {
-    const contenedor = document.getElementById('destacados-lista');
-    const items = contenedor.children;
-    let index = 0;
+function iniciarSliderManual() {
+    const items = document.querySelectorAll('.slider-item');
+    const nextBtn = document.getElementById('next-slide');
+    const prevBtn = document.getElementById('prev-slide');
 
-    function ocultarTodos() {
-        for (let item of items) {
-            item.style.display = 'none';
-        }
+    function mostrarSlide(index) {
+        items.forEach((item, i) => {
+            item.classList.toggle('active', i === index);
+        });
     }
 
-    function mostrarActual() {
-        ocultarTodos();
-        if (items.length > 0) {
-            items[index].style.display = 'block';
-        }
-    }
+    nextBtn.addEventListener('click', () => {
+        indexSlider = (indexSlider + 1) % items.length;
+        mostrarSlide(indexSlider);
+    });
 
-    function siguiente() {
-        index = (index + 1) % items.length;
-        mostrarActual();
-    }
+    prevBtn.addEventListener('click', () => {
+        indexSlider = (indexSlider - 1 + items.length) % items.length;
+        mostrarSlide(indexSlider);
+    });
 
-    mostrarActual();
-    setInterval(siguiente, 3000);
+    setInterval(() => {
+        indexSlider = (indexSlider + 1) % items.length;
+        mostrarSlide(indexSlider);
+    }, 5000);
 }
 
 function addToCart(productName) {

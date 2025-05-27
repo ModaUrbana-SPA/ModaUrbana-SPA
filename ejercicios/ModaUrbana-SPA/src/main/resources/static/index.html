@@ -2,21 +2,18 @@
 <html lang="es">
 
 <head>
-  <!-- Metadatos -->
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="Moda Urbana: Ropa moderna y de calidad para todos los estilos.">
   <meta name="keywords" content="moda, ropa, tienda, estilo, urbana">
   <meta name="author" content="Moda Urbana">
   <title>Moda Urbana</title>
-  <!-- Estilos y fuentes -->
   <link rel="stylesheet" href="/style.css">
   <link rel="icon" href="favicon.ico" type="image/x-icon">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 
 <body>
-  <!-- Encabezado -->
   <header>
     <nav class="fade-in">
       <h1>Moda Urbana</h1>
@@ -43,7 +40,7 @@
   </div>
 
   <!-- Banner promocional -->
-  <section class="container fade-in" style="background: #ffcc00; color: #1e0030; padding: 1.5rem; border-radius: 8px;">
+  <section class="container fade-in" style="background: #070605; color: #1eff00; padding: 1.5rem; border-radius: 8px;">
     <h2>¡Rebajas de temporada!</h2>
     <p>Descubre descuentos de hasta el 50% en nuestra colección de invierno.</p>
   </section>
@@ -54,10 +51,13 @@
     <p>Moda Urbana es una tienda dedicada a ofrecer ropa moderna y de calidad para todos los estilos.</p>
   </section>
 
+  <!-- Productos destacados -->
   <section id="featured" class="container fade-in">
-    <h2><i class="fas fa-star"></i> Productos Destacados</h2>
-    <div class="slider-destacados">
-      <div id="destacados-lista" class="slider-track"></div>
+    <h2><i class="fas fa-star"></i> Productos destacados</h2>
+    <div id="slider-destacados" class="slider-destacados">
+      <button id="prev-slide" class="slider-btn">&#10094;</button>
+      <div id="slide-image-container"></div>
+      <button id="next-slide" class="slider-btn">&#10095;</button>
     </div>
   </section>
 
@@ -93,7 +93,6 @@
     </div>
   </div>
 
-  <!-- Pie de página -->
   <footer>
     <p>&copy; 2025 Moda Urbana. Todos los derechos reservados.</p>
     <div>
@@ -102,107 +101,8 @@
       <a href="https://twitter.com" target="_blank"><i class="fab fa-twitter"></i></a>
     </div>
   </footer>
-  <script>
 
-    let cart = [];
-    let productos = [];
-
-    fetch('http://localhost:8080/prendas')
-      .then(res => res.json())
-      .then(data => {
-        productos = data;
-        mostrarDestacados();
-        mostrarProductos();
-      })
-      .catch(error => console.error("Error al obtener productos del backend:", error));
-
-
-    function mostrarProductos() {
-      const contenedor = document.getElementById('productos-lista');
-      contenedor.innerHTML = '';
-      productos.forEach(prod => {
-        contenedor.innerHTML += `
-          <div class="product">
-            <img src="${prod.imagen}" alt="${prod.nombre}" class="pulse">
-            <p>${prod.nombre}</p>
-            <p><b>$${prod.precio}</b></p>
-            <button class="add-to-cart" data-product="${prod.nombre}">Agregar al carrito</button>
-          </div>
-        `;
-      });
-      document.querySelectorAll('.add-to-cart').forEach(btn => {
-        btn.addEventListener('click', function () {
-          const product = this.getAttribute('data-product');
-          addToCart(product);
-        });
-      });
-    }
-
-    function mostrarDestacados() {
-      const contenedor = document.getElementById('destacados-lista');
-      contenedor.innerHTML = '';
-      productos.filter(p => p.destacado).forEach(prod => {
-        contenedor.innerHTML += `
-          <div class="product">
-            <img src="${prod.imagen}" alt="${prod.nombre}" class="pulse">
-            <p>${prod.nombre}</p>
-            <p><b>$${prod.precio}</b></p>
-            <button class="add-to-cart" data-product="${prod.nombre}">Agregar al carrito</button>
-          </div>
-        `;
-      });
-    }
-
-    function addToCart(productName) {
-      const prod = productos.find(p => p.nombre === productName);
-      if (!prod) return;
-      const found = cart.find(item => item.name === productName);
-      if (found) {
-        found.qty += 1;
-      } else {
-        cart.push({ name: productName, qty: 1, price: prod.precio });
-      }
-      document.getElementById('cart-count').textContent = cart.reduce((acc, item) => acc + item.qty, 0);
-      updateCartModal();
-    }
-
-    document.getElementById('cart-btn').addEventListener('click', function (e) {
-      e.preventDefault();
-      document.getElementById('cart-modal').style.display = 'block';
-      updateCartModal();
-    });
-
-    document.getElementById('close-cart').addEventListener('click', function () {
-      document.getElementById('cart-modal').style.display = 'none';
-    });
-
-    function updateCartModal() {
-      const cartItems = document.getElementById('cart-items');
-      cartItems.innerHTML = '';
-      let total = 0;
-      cart.forEach((item, idx) => {
-        const subtotal = item.qty * item.price;
-        total += subtotal;
-        const li = document.createElement('li');
-        li.innerHTML = `
-          ${item.name} (x${item.qty}) - $${item.price} c/u = <b>$${subtotal}</b>
-          <button onclick="removeFromCart(${idx})" style="margin-left:10px;">Eliminar</button>
-        `;
-        cartItems.appendChild(li);
-      });
-      if (cart.length > 0) {
-        const totalLi = document.createElement('li');
-        totalLi.innerHTML = `<b>Total: $${total}</b>`;
-        cartItems.appendChild(totalLi);
-      }
-    }
-
-    window.removeFromCart = function (idx) {
-      cart.splice(idx, 1);
-      document.getElementById('cart-count').textContent = cart.reduce((acc, item) => acc + item.qty, 0);
-      updateCartModal();
-    }
-  </script>
+  <script src="/script.js" defer></script>
 </body>
 
 </html>

@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Detalle de Producto</title>
+    <link rel="stylesheet" href="style.css" />
+</head>
+
+<body>
+    <header>
+        <h1>Detalle del Producto</h1>
+    </header>
+
+    <main id="detalle-producto" class="container fade-in">
+        <!-- Aquí se inyectará el contenido por JS -->
+    </main>
+
+    <script>
+        const params = new URLSearchParams(window.location.search);
+        const id = params.get("id");
+
+        fetch(`/prendas/${id}`)
+            .then(res => res.json())
+            .then(prod => {
+                const container = document.getElementById("detalle-producto");
+                container.innerHTML = `
+          <div class="product-detail">
+            <img src="${prod.imagen}" alt="${prod.nombre}" class="detalle-img" />
+            <div class="detalle-info">
+              <h2>${prod.nombre}</h2>
+              <p><strong>Precio:</strong> $${prod.precio}</p>
+              <p><strong>Color:</strong> ${prod.color}</p>
+              <p><strong>Talla:</strong> ${prod.talla}</p>
+              <p><strong>Stock disponible:</strong> ${prod.stock}</p>
+              <button class="glow-btn" onclick="agregarAlCarrito('${prod.nombre}')">Agregar al carrito</button>
+            </div>
+          </div>
+        `;
+            });
+
+        function agregarAlCarrito(nombre) {
+            alert(`Producto "${nombre}" agregado al carrito`);
+        }
+    </script>
+</body>
+
+</html>
