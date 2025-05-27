@@ -342,4 +342,22 @@ footer a:hover {
     .product {
         width: 90%;
     }
+
+
+}
+
+.slider-destacados {
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+}
+
+.slider-track {
+    display: flex;
+    transition: transform 0.5s ease-in-out;
+}
+
+.slider-track .product {
+    min-width: 100%;
+    box-sizing: border-box;
 }

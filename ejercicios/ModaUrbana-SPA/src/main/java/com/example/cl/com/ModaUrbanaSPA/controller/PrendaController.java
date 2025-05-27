@@ -32,9 +32,15 @@ public class PrendaController {
     }
 
     @PostMapping
-    public ResponseEntity<Prenda> guardar(@RequestBody Prenda prenda) {
-        Prenda nuevaPrenda = prendaService.save(prenda);
-        return ResponseEntity.status(HttpStatus.CREATED).body(nuevaPrenda);
+    public ResponseEntity<?> guardar(@RequestBody Prenda prenda) {
+        try {
+            Prenda nuevaPrenda = prendaService.save(prenda);
+            return ResponseEntity.status(HttpStatus.CREATED).body(nuevaPrenda);
+        } catch (Exception e) {
+            e.printStackTrace(); // 👈 Esto mostrará la causa del error en consola
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body("Error al guardar prenda: " + e.getMessage());
+        }
     }
 
     @PutMapping("/{id}")

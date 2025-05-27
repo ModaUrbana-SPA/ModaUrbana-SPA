@@ -7,6 +7,7 @@ document.addEventListener("DOMContentLoaded", () => {
         .then(data => {
             productos = data;
             mostrarDestacados();
+            iniciarSliderDestacados(); // 👉 Se agregó aquí
             mostrarProductos();
         })
         .catch(err => {
@@ -67,6 +68,33 @@ function mostrarDestacados() {
             addToCart(product);
         });
     });
+}
+
+function iniciarSliderDestacados() {
+    const contenedor = document.getElementById('destacados-lista');
+    const items = contenedor.children;
+    let index = 0;
+
+    function ocultarTodos() {
+        for (let item of items) {
+            item.style.display = 'none';
+        }
+    }
+
+    function mostrarActual() {
+        ocultarTodos();
+        if (items.length > 0) {
+            items[index].style.display = 'block';
+        }
+    }
+
+    function siguiente() {
+        index = (index + 1) % items.length;
+        mostrarActual();
+    }
+
+    mostrarActual();
+    setInterval(siguiente, 3000);
 }
 
 function addToCart(productName) {

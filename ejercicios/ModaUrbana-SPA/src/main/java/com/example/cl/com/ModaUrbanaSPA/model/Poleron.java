@@ -13,9 +13,9 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class Poleron extends Prenda {
-    @Column(nullable = false)
+    @Column(nullable = true)
     private boolean tienecapucha;
-    @Column(nullable = false)
+    @Column(nullable = true)
     private boolean tieneEstampado;
 
 }

@@ -12,8 +12,8 @@ import lombok.*;
 @AllArgsConstructor
 
 public class Polera extends Prenda {
-    @Column(nullable = false)
+    @Column(nullable = true)
     private boolean tieneEstampado;
-    @Column(nullable = false)
+    @Column(nullable = true)
     private boolean tieneManga;
 }
