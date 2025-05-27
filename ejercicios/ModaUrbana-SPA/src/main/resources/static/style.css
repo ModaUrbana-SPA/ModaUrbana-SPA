@@ -1,25 +1,26 @@
-/* Estilos generales */
+/* ======== Estilos generales ======== */
 body {
-    font-family: Arial, sans-serif;
+    font-family: 'Poppins', sans-serif;
     margin: 0;
     padding: 0;
-    background: linear-gradient(135deg, #f4f4f4, #e0e0e0); /* Fondo degradado */
-    color: #333; /* Color de texto principal */
-    animation: urbanEntrance 1.5s ease-out; /* Animación de entrada */
+    background: linear-gradient(135deg, #f4f4f4, #e0e0e0);
+    color: #333;
+    animation: urbanEntrance 1.5s ease-out;
 }
 
-/* Animación de entrada para el cuerpo */
 @keyframes urbanEntrance {
     0% {
         opacity: 0;
         transform: scale(0.9) translateY(50px);
         background: linear-gradient(135deg, #333, #000);
     }
+
     50% {
         opacity: 0.5;
         transform: scale(1.05) translateY(0);
         background: linear-gradient(135deg, #444, #111);
     }
+
     100% {
         opacity: 1;
         transform: scale(1) translateY(0);
@@ -27,13 +28,13 @@ body {
     }
 }
 
-/* Estilos del encabezado */
+/* ======== Header ======== */
 header {
-    background-color: #1e0030; /* Fondo oscuro */
-    color: #fff; /* Texto blanco */
+    background-color: #1e0030;
+    color: #fff;
     padding: 1rem 0;
     text-align: center;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Sombra */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
 header h1 {
@@ -41,7 +42,6 @@ header h1 {
     font-size: 2rem;
 }
 
-/* Estilos de navegación */
 nav {
     display: flex;
     justify-content: space-between;
@@ -85,56 +85,56 @@ nav ul li a:hover {
 }
 
 nav ul li a:hover::after {
-    width: 100%; /* Subrayado al pasar el mouse */
+    width: 100%;
 }
 
-/* Contenedor principal */
+/* ======== Containers & Sections ======== */
 .container {
     max-width: 1200px;
     margin: 2rem auto;
     padding: 0 1rem;
     text-align: center;
-    opacity: 0;
-    transform: translateX(-50px);
-    animation: slideIn 1s ease forwards; /* Animación de entrada */
+    animation: slideIn 1s ease forwards;
 }
 
-/* Animación de entrada para contenedores */
 @keyframes slideIn {
     from {
         opacity: 0;
         transform: translateX(-50px);
     }
+
     to {
         opacity: 1;
         transform: translateX(0);
     }
 }
 
-/* Estilos de las secciones */
 section {
     margin: 2rem 0;
     padding: 1rem;
     background-color: #fff;
     border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Sombra */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
-/* Estilos de formularios */
+/* ======== Formulario ======== */
 form {
     display: flex;
     flex-direction: column;
     gap: 1rem;
 }
 
-form input, form textarea, form button {
+form input,
+form textarea,
+form button {
     width: 100%;
     padding: 0.5rem;
     border: 1px solid #ccc;
     border-radius: 4px;
 }
 
-form input:focus, form textarea:focus {
+form input:focus,
+form textarea:focus {
     border-color: #ffcc00;
     box-shadow: 0 0 5px rgba(255, 204, 0, 0.5);
     outline: none;
@@ -151,77 +151,63 @@ form button {
 }
 
 form button:hover {
-    background-color: #ffcc00; /* Cambio de color al pasar el mouse */
-    transform: scale(1.05); /* Efecto de escala */
+    background-color: #ffcc00;
+    transform: scale(1.05);
     animation: bounce 0.5s ease;
     box-shadow: 0 6px 12px rgba(255, 204, 0, 0.4);
 }
 
-/* Animación de rebote */
 @keyframes bounce {
-    0%, 100% {
+
+    0%,
+    100% {
         transform: translateY(0);
     }
+
     50% {
         transform: translateY(-5px);
     }
 }
 
-/* Estilos de imágenes */
-img {
-    width: 100%;
-    height: auto;
-    transition: transform 0.3s ease;
-    border-radius: 8px;
+/* ======== Productos (Flexbox mejorado) ======== */
+#productos-lista,
+#destacados-lista {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 1rem;
 }
 
-img:hover {
-    transform: scale(1.1); /* Efecto de zoom */
-}
-
-/* Estilos de productos */
 .product {
-    display: inline-block;
-    width: 45%;
-    margin: 1rem;
-    text-align: center;
+    width: 260px;
     background: #fff;
+    padding: 1rem;
     border-radius: 8px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    text-align: center;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 .product:hover {
-    transform: translateY(-5px); /* Efecto de elevación */
+    transform: translateY(-5px);
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
 }
 
 .product img {
     width: 100%;
-    max-width: 300px; /* Tamaño máximo ajustado */
-    height: auto;
-    transition: transform 0.3s ease;
+    max-height: 240px;
+    object-fit: cover;
     border-radius: 8px;
 }
 
 .product p {
+    margin: 0.5rem 0;
     font-size: 1.1rem;
-    font-weight: bold;
-    margin-top: 0.5rem;
 }
 
-/* Estilos de íconos */
-i {
-    transition: transform 0.3s ease;
-}
-
-i:hover {
-    transform: rotate(360deg);
-}
-
-/* Estilos del slider */
+/* ======== Slider ======== */
 .slider {
-    position: absolute;
+    position: relative;
     width: 100%;
     max-height: 500px;
     overflow: hidden;
@@ -232,18 +218,13 @@ i:hover {
     width: 100%;
     max-height: 500px;
     object-fit: cover;
-    margin: 0 auto;
     display: none;
+    border-radius: 8px;
 }
 
 .slider img.active {
     display: block;
     opacity: 1;
-}
-
-/* Se elimina el efecto de agrandamiento */
-.slider img:hover {
-    transform: none;
 }
 
 .slider-controls {
@@ -267,18 +248,16 @@ i:hover {
     transition: background 0.3s ease;
 }
 
-slider-controls button:hover {
+.slider-controls button:hover {
     background: rgba(0, 0, 0, 0.8);
 }
 
-/* Estilos del pie de página */
+/* ======== Footer ======== */
 footer {
     background-color: #1e0030;
     color: #fff;
     text-align: center;
     padding: 1rem 0;
-    position: relative;
-    bottom: 0;
     width: 100%;
     box-shadow: 0 -4px 6px rgba(0, 0, 0, 0.1);
 }
@@ -291,23 +270,11 @@ footer a {
 }
 
 footer a:hover {
-    transform: translateY(-5px); /* Efecto de elevación */
-    color: #ffcc00; /* Cambio de color */
+    transform: translateY(-5px);
+    color: #ffcc00;
 }
 
-/* Animaciones importadas */
-@keyframes fadeIn {
-    from { opacity: 0; transform: translateY(20px); }
-    to { opacity: 1; transform: translateY(0); }
-}
-
-@keyframes pulse {
-    0% { transform: scale(1); }
-    50% { transform: scale(1.05); }
-    100% { transform: scale(1); }
-}
-
-/* Clases animadas */
+/* ======== Efectos y animaciones ======== */
 .fade-in {
     animation: fadeIn 1s ease forwards;
 }
@@ -316,7 +283,32 @@ footer a:hover {
     animation: pulse 2s infinite;
 }
 
-/* Botones con efecto glow */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes pulse {
+    0% {
+        transform: scale(1);
+    }
+
+    50% {
+        transform: scale(1.05);
+    }
+
+    100% {
+        transform: scale(1);
+    }
+}
+
 .glow-btn {
     background: linear-gradient(45deg, #ffcc00, #ff9900);
     color: #fff;
@@ -332,59 +324,7 @@ footer a:hover {
     box-shadow: 0 5px 15px rgba(255, 204, 0, 0.4);
 }
 
-/* Slider de imágenes */
-.slider {
-    position: relative;
-    width: 100%;
-    max-height: 500px; /* Altura máxima ajustada */
-    overflow: hidden;
-    margin-bottom: 2rem;
-}
-
-.slider img {
-    width: 100%;
-    max-height: 500px; /* Altura máxima ajustada */
-    object-fit: cover; /* Ajusta la imagen al contenedor */
-    margin: 0 auto;
-    display: none;
-}
-
-.slider img.active {
-    display: block;
-    opacity: 1;
-}
-
-/* Se elimina el efecto de agrandamiento */
-.slider img:hover {
-    transform: none;
-}
-
-.slider-controls {
-    position: absolute;
-    top: 50%;
-    width: 100%;
-    display: flex;
-    justify-content: space-between;
-    transform: translateY(-50%);
-    pointer-events: none;
-}
-
-.slider-controls button {
-    background: rgba(0, 0, 0, 0.5);
-    border: none;
-    color: #fff;
-    font-size: 2rem;
-    padding: 0.5rem 1rem;
-    cursor: pointer;
-    pointer-events: auto;
-    transition: background 0.3s ease;
-}
-
-slider-controls button:hover {
-    background: rgba(0, 0, 0, 0.8);
-}
-
-/* Estilos responsivos */
+/* ======== Responsive ======== */
 @media (max-width: 768px) {
     nav ul {
         flex-direction: column;
@@ -397,5 +337,9 @@ slider-controls button:hover {
 
     .container {
         padding: 0.5rem;
+    }
+
+    .product {
+        width: 90%;
     }
 }
