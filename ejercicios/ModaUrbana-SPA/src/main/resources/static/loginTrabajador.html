@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8" />
+    <title>Login Trabajador</title>
+    <link rel="stylesheet" href="style.css" />
+</head>
+
+<body>
+    <section class="container">
+        <h2>Iniciar sesión (Trabajador)</h2>
+        <form id="login-form">
+            <input type="email" id="correo" placeholder="Correo" required />
+            <input type="password" id="contrasena" placeholder="Contraseña" required />
+            <button type="submit" class="glow-btn">INGRESAR</button>
+        </form>
+        <p id="login-error" style="color: red; margin-top: 10px;"></p>
+
+        <div class="volver-container">
+            <button onclick="window.location.href='index.html'" class="glow-btn">⬅ Volver</button>
+        </div>
+
+    </section>
+
+    <script>
+        document.getElementById('login-form').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const correo = document.getElementById('correo').value.trim();
+            const contrasena = document.getElementById('contrasena').value.trim();
+            const errorText = document.getElementById('login-error');
+
+            try {
+                const res = await fetch('/usuarios');
+                if (!res.ok) throw new Error(`Estado HTTP: ${res.status}`);
+                const usuarios = await res.json();
+
+                console.log('Usuarios:', usuarios);
+
+                const trabajador = usuarios.find(u =>
+                    u.correo.trim().toLowerCase() === correo.toLowerCase() &&
+                    u.rol === 'TRABAJADOR'
+                );
+
+                if (!trabajador) {
+                    errorText.textContent = 'No se encontró un trabajador con ese correo.';
+                    return;
+                }
+
+                if (trabajador.contraseña !== contrasena) {
+                    errorText.textContent = 'Contraseña incorrecta.';
+                    return;
+                }
+
+                localStorage.setItem('rol', trabajador.rol);
+                localStorage.setItem('usuario', JSON.stringify(trabajador));
+                window.location.href = 'admin.html';
+            } catch (error) {
+                console.error('ERROR en login:', error);
+                errorText.textContent = 'Error al iniciar sesión. Intenta nuevamente.';
+            }
+        });
+    </script>
+
+</body>
+
+</html>

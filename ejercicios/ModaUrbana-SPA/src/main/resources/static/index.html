@@ -15,8 +15,11 @@
 
 <body>
   <header>
-    <nav class="fade-in">
-      <h1>Moda Urbana</h1>
+    <nav class="fade-in custom-header">
+      <button id="login-toggle" class="glow-btn small-btn"> Iniciar Sesión</button>
+      <button id="btn-logout" class="glow-btn" style="display: none;">CERRAR SESIÓN</button>
+      <h1 class="centered-title">Moda Urbana</h1>
+
       <ul>
         <li><a href="#home">Inicio</a></li>
         <li><a href="#about">Sobre nosotros</a></li>
@@ -32,11 +35,23 @@
     </nav>
   </header>
 
+  <!-- Modal emergente de login -->
+  <div id="login-modal" class="modal">
+    <div class="modal-content">
+      <!-- Botones de sesión -->
+
+
+      <span id="close-login" class="cerrar-modal">&times;</span>
+      <h2>Iniciar Sesión</h2>
+      <button onclick="window.location.href='loginCliente.html'" class="glow-btn">CLIENTE</button>
+      <button onclick="window.location.href='loginTrabajador.html'" class="glow-btn">TRABAJADOR</button>
+    </div>
+  </div>
+
+
   <!-- Slider de imágenes -->
   <div class="slider">
-    <img src="slider4.jpg" alt="Imagen 1" class="active">
-    <img src="slider3.jpg" alt="Imagen 2">
-    <img src="slider5.png" alt="Imagen 3">
+    <img src="MONOS_SLIDER_.png" alt="Imagen 1" class="active">
   </div>
 
   <!-- Banner promocional -->
@@ -84,12 +99,12 @@
     </form>
   </section>
 
-  <!-- Modal del carrito -->
+  <!-- Modal del carrito flotante -->
   <div id="cart-modal" class="cart-modal" style="display:none;">
     <div class="cart-content">
       <h3>Carrito de compras</h3>
       <ul id="cart-items"></ul>
-      <button id="close-cart">Cerrar</button>
+      <button id="close-cart" class="glow-btn small-btn">Cerrar</button>
     </div>
   </div>
 

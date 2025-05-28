@@ -82,7 +82,7 @@ nav ul li a::after {
     position: absolute;
     width: 0;
     height: 2px;
-    background-color: #ffcc00;
+    background-color: #20a38d;
     left: 0;
     bottom: -5px;
     transition: width 0.3s ease;
@@ -159,7 +159,7 @@ form button {
 }
 
 form button:hover {
-    background-color: #ffcc00;
+    background-color: #34927e;
     transform: scale(1.05);
     animation: bounce 0.5s ease;
     box-shadow: 0 6px 12px rgba(255, 204, 0, 0.4);
@@ -318,7 +318,7 @@ footer a:hover {
 }
 
 .glow-btn {
-    background: linear-gradient(45deg, #ffcc00, #ff9900);
+    background: linear-gradient(45deg, #79ebc9, #1b1000);
     color: #fff;
     border-radius: 25px;
     padding: 10px 20px;
@@ -559,4 +559,152 @@ footer a:hover {
 .detalle-info {
     text-align: center;
     font-size: 1.2rem;
+}
+
+.detalle-volver {
+    margin-top: 2rem;
+    text-align: center;
+    display: block;
+}
+
+.detalle-volver button {
+    padding: 10px 20px;
+    font-size: 1rem;
+    cursor: pointer;
+}
+
+.active {
+    background-image: url('MONOS_SLIDER_.png');
+    background-size: cover;
+    background-position: center;
+    height: 500px;
+    /* o lo que necesites */
+    width: 100%;
+}
+
+.slider {
+    width: 100%;
+    max-height: 500px;
+    /* Ajusta según tu diseño */
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #000;
+    border-radius: 8px;
+}
+
+.slider img.active {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+    /* Muestra la imagen completa sin recortarla */
+    display: block;
+}
+
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 999;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.8);
+    justify-content: center;
+    align-items: center;
+}
+
+.modal-content {
+    background: #111;
+    padding: 2rem;
+    border-radius: 10px;
+    position: relative;
+    /* necesario para ubicar el botón cerrar */
+    text-align: center;
+}
+
+.cerrar-modal {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    font-size: 20px;
+    font-weight: bold;
+    color: white;
+    background: #ff5f6d;
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+    border: none;
+    text-align: center;
+    line-height: 30px;
+    cursor: pointer;
+    transition: background 0.3s ease;
+}
+
+.cerrar-modal:hover {
+    background: #ff4040;
+}
+
+#btn-login,
+#btn-logout {
+    margin-right: 1rem;
+}
+
+.nav-right {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+#btn-login,
+#btn-logout {
+    padding: 8px 12px;
+    font-size: 14px;
+}
+
+.cart-modal {
+    position: fixed;
+    top: 70px;
+    /* debajo de la barra de navegación */
+    right: 20px;
+    background-color: #fff;
+    color: #000;
+    width: 300px;
+    max-height: 400px;
+    overflow-y: auto;
+    border: 2px solid #ccc;
+    border-radius: 10px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+    z-index: 1000;
+    display: none;
+}
+
+.cart-content {
+    padding: 1rem;
+}
+
+.cart-content h3 {
+    margin-top: 0;
+    font-family: 'YourTitleFont', sans-serif;
+}
+
+.cart-content ul {
+    list-style: none;
+    padding: 0;
+}
+
+.cart-content button {
+    margin-top: 10px;
+    background-color: #e74c3c;
+    color: white;
+    border: none;
+    padding: 8px 12px;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+.cart-content button:hover {
+    background-color: #c0392b;
 }

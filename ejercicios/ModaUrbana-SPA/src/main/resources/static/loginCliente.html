@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8" />
+    <title>Login Cliente</title>
+    <link rel="stylesheet" href="style.css" />
+</head>
+
+<body>
+    <section class="container">
+        <h2>Registrarse</h2>
+        <form id="register-form">
+            <input type="text" id="reg-nombre" placeholder="Nombre" required />
+            <input type="email" id="reg-correo" placeholder="Correo" required />
+            <input type="password" id="reg-contrasena" placeholder="Contraseña" required />
+            <button type="submit" class="glow-btn">Registrarse</button>
+        </form>
+
+        <h2>Iniciar sesión</h2>
+        <form id="login-form">
+            <input type="email" id="log-correo" placeholder="Correo" required />
+            <input type="password" id="log-contrasena" placeholder="Contraseña" required />
+            <button type="submit" class="glow-btn">Ingresar</button>
+        </form>
+
+        <p id="error-msg" style="color: red;"></p>
+
+        <div class="volver-container">
+            <button onclick="window.location.href='index.html'" class="glow-btn">⬅ Volver</button>
+        </div>
+
+    </section>
+
+    <script>
+        document.getElementById('register-form').addEventListener('submit', e => {
+            e.preventDefault();
+            const data = {
+                nombre: document.getElementById('reg-nombre').value,
+                correo: document.getElementById('reg-correo').value,
+                contraseña: document.getElementById('reg-contrasena').value,
+                rol: 'CLIENTE'
+            };
+
+            fetch('/usuarios', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(data)
+            })
+                .then(res => res.json())
+                .then(user => {
+                    alert('Usuario registrado');
+                });
+        });
+
+        document.getElementById('login-form').addEventListener('submit', e => {
+            e.preventDefault();
+            const correo = document.getElementById('log-correo').value;
+            const contrasena = document.getElementById('log-contrasena').value;
+
+            fetch('/usuarios')
+                .then(res => res.json())
+                .then(usuarios => {
+                    const user = usuarios.find(u => u.correo === correo && u.contraseña === contrasena && u.rol === 'CLIENTE');
+                    if (user) {
+                        localStorage.setItem('rol', user.rol);
+                        localStorage.setItem('usuario', JSON.stringify(user));
+                        alert('Bienvenido cliente');
+                        window.location.href = 'index.html';
+                    } else {
+                        document.getElementById('error-msg').textContent = 'Credenciales inválidas';
+                    }
+                });
+        });
+    </script>
+</body>
+
+</html>
