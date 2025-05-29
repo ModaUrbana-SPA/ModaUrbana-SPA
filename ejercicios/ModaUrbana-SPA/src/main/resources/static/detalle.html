@@ -22,33 +22,10 @@
         <!-- Aquí se carga el detalle del producto -->
     </main>
 
-    <script>
-        const params = new URLSearchParams(window.location.search);
-        const id = params.get("id");
 
-        fetch(`/prendas/${id}`)
-            .then(res => res.json())
-            .then(prod => {
-                const container = document.getElementById("detalle-producto");
-                container.innerHTML = `
-          <div class="product-detail">
-            <img src="${prod.imagen}" alt="${prod.nombre}" class="detalle-img" />
-            <div class="detalle-info">
-              <h2>${prod.nombre}</h2>
-              <p><strong>Precio:</strong> $${prod.precio}</p>
-              <p><strong>Color:</strong> ${prod.color}</p>
-              <p><strong>Talla:</strong> ${prod.talla}</p>
-              <p><strong>Stock disponible:</strong> ${prod.stock}</p>
-              <button class="glow-btn" onclick="agregarAlCarrito('${prod.nombre}')">Agregar al carrito</button>
-            </div>
-          </div>
-        `;
-            });
+    <script src="detalle.js" defer></script>
 
-        function agregarAlCarrito(nombre) {
-            alert(`Producto "${nombre}" agregado al carrito`);
-        }
-    </script>
+
 </body>
 
 </html>

@@ -6,6 +6,7 @@ import com.example.cl.com.ModaUrbanaSPA.repository.UsuarioRepositorio;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -28,6 +29,16 @@ public class UsuarioController {
     @GetMapping
     public List<Usuario> listarUsuarios() {
         return usuarioRepositorio.findAll();
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<String> eliminarUsuario(@PathVariable Long id) {
+        if (!usuarioRepositorio.existsById(id)) {
+            return ResponseEntity.notFound().build();
+        }
+
+        usuarioRepositorio.deleteById(id);
+        return ResponseEntity.ok("Usuario eliminado correctamente");
     }
 
 }

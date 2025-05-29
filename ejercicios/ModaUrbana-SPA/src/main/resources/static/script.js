@@ -197,3 +197,24 @@ document.addEventListener("DOMContentLoaded", () => {
         loginModal.style.display = "flex";
     });
 });
+
+
+function abrirModalCarrito() {
+    const modal = document.getElementById("cart-modal");
+    if (modal) {
+        modal.style.display = "block";
+        updateCartModal?.(); // actualiza contenido si la función existe
+    }
+}
+
+
+document.addEventListener("DOMContentLoaded", () => {
+    // 👇 Detectar si se debe abrir el carrito automáticamente
+    const params = new URLSearchParams(window.location.search);
+    const abrirCarrito = params.get("abrirCarrito");
+
+    if (abrirCarrito === "true") {
+        document.getElementById("cart-modal").style.display = "block";
+        updateCartModal(); // Asegúrate de tener esta función definida para actualizar la vista
+    }
+});
