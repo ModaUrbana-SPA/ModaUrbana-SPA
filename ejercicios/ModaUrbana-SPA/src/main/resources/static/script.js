@@ -209,7 +209,7 @@ function abrirModalCarrito() {
 
 
 document.addEventListener("DOMContentLoaded", () => {
-    // 👇 Detectar si se debe abrir el carrito automáticamente
+    //  Detectar si se debe abrir el carrito automáticamente
     const params = new URLSearchParams(window.location.search);
     const abrirCarrito = params.get("abrirCarrito");
 
