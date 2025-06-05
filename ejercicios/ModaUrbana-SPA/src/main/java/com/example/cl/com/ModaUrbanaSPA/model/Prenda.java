@@ -1,20 +1,9 @@
 package com.example.cl.com.ModaUrbanaSPA.model;
 
-import com.fasterxml.jackson.annotation.JsonSubTypes;
-import com.fasterxml.jackson.annotation.JsonTypeInfo;
-
 import jakarta.persistence.*;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
 import lombok.*;
 
-//@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
-//@DiscriminatorColumn(name = "tipo_prenda")
-//@JsonTypeInfo(use = JsonTypeInfo.Id.NAME, include = JsonTypeInfo.As.PROPERTY, property = "tipo_prenda")
-/*@JsonSubTypes({
-        //@JsonSubTypes.Type(value = Polera.class, name = "POLERA"),
-        //@JsonSubTypes.Type(value = Poleron.class, name = "POLERON")
-})*/
+
 
 // lombok
 @Data
@@ -26,10 +15,10 @@ import lombok.*;
 public class Prenda {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    private Integer id_prenda;
 
     @Column(length = 50, nullable = false)
-    private String nombre;
+    private String nombre_prenda;
 
     @Column(nullable = false)
     private Integer precio;
@@ -42,8 +31,11 @@ public class Prenda {
 
     @Column(nullable = false)
     private Integer stock;
-    @Column(nullable = false)
+
+    @Column(length = 100, nullable = false)
     private String imagen;
-    @Column(nullable = false)
-    private boolean destacado;
+
+    @ManyToOne
+    @JoinColumn(name = "id_tipo_prenda", referencedColumnName = "id_tipo_prenda")
+    private TipoPrenda id_tipo_Prenda;
 }

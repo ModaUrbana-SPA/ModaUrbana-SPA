@@ -46,13 +46,12 @@ public class PrendaController {
     @PutMapping("/{id}")
     public ResponseEntity<Prenda> actualizar(@PathVariable Long id, @RequestBody Prenda prenda) {
         Prenda existente = prendaService.fetchById(id);
-        existente.setNombre(prenda.getNombre());
+        existente.setNombre_prenda(prenda.getNombre_prenda());
         existente.setPrecio(prenda.getPrecio());
         existente.setStock(prenda.getStock());
         existente.setTalla(prenda.getTalla());
         existente.setColor(prenda.getColor());
         existente.setImagen(prenda.getImagen());
-        existente.setDestacado(prenda.isDestacado());
 
         prendaService.save(existente);
         return ResponseEntity.ok(existente);
