@@ -8,13 +8,13 @@ import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 import lombok.*;
 
-@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
-@DiscriminatorColumn(name = "tipo_prenda")
-@JsonTypeInfo(use = JsonTypeInfo.Id.NAME, include = JsonTypeInfo.As.PROPERTY, property = "tipo_prenda")
-@JsonSubTypes({
-        @JsonSubTypes.Type(value = Polera.class, name = "POLERA"),
-        @JsonSubTypes.Type(value = Poleron.class, name = "POLERON")
-})
+//@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
+//@DiscriminatorColumn(name = "tipo_prenda")
+//@JsonTypeInfo(use = JsonTypeInfo.Id.NAME, include = JsonTypeInfo.As.PROPERTY, property = "tipo_prenda")
+/*@JsonSubTypes({
+        //@JsonSubTypes.Type(value = Polera.class, name = "POLERA"),
+        //@JsonSubTypes.Type(value = Poleron.class, name = "POLERON")
+})*/
 
 // lombok
 @Data

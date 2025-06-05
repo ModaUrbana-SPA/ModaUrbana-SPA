@@ -1,3 +1,4 @@
+/*
 package com.example.cl.com.ModaUrbanaSPA.model;
 
 import jakarta.persistence.Column;
@@ -17,3 +18,4 @@ public class Polera extends Prenda {
     @Column(nullable = true)
     private boolean tieneManga;
 }
+*/
