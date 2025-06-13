@@ -19,4 +19,15 @@ public class TipoPrenda {
 
     @Column(length = 50, nullable = false)
     private String nombre;
+
+    private Long id;
+    // other fields, constructors, etc.
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
 }

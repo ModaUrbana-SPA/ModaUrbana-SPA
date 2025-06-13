@@ -11,7 +11,7 @@ import com.example.cl.com.ModaUrbanaSPA.model.Prenda;
 import com.example.cl.com.ModaUrbanaSPA.service.PrendaService;
 
 @RestController
-@RequestMapping("api/prendas")
+@RequestMapping("/api/prendas")
 public class PrendaController {
 
     @Autowired
