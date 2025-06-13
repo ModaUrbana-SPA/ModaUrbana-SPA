@@ -98,7 +98,7 @@ nav ul li a:hover::after {
 
 /* ======== Containers & Sections ======== */
 .container {
-    max-width: 1200px;
+    max-width: 1500px;
     margin: 2rem auto;
     padding: 0 1rem;
     text-align: center;

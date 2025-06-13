@@ -1,9 +1,12 @@
 package com.example.cl.com.ModaUrbanaSPA.repository;
 
+import java.util.Optional;
+
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import com.example.cl.com.ModaUrbanaSPA.model.Usuario;
 
 public interface UsuarioRepositorio extends JpaRepository<Usuario, Long> {
-    Usuario findByCorreo(String correo);
+    Optional<Usuario> findByNombreUsuario(String nombreUsuario);
+
 }

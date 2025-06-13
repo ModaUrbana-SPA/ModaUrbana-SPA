@@ -11,7 +11,7 @@ import com.example.cl.com.ModaUrbanaSPA.model.Prenda;
 import com.example.cl.com.ModaUrbanaSPA.service.PrendaService;
 
 @RestController
-@RequestMapping("/prendas")
+@RequestMapping("api/prendas")
 public class PrendaController {
 
     @Autowired
@@ -63,5 +63,3 @@ public class PrendaController {
         return ResponseEntity.noContent().build();
     }
 }
-
-// chupala ro B)
