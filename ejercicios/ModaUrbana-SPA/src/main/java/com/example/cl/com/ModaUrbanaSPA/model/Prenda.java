@@ -31,7 +31,7 @@ public class Prenda {
 
     @ManyToOne
     @JoinColumn(name = "id_tipo_prenda", referencedColumnName = "id_tipo_prenda")
-    private TipoPrenda id_tipo_Prenda;
+    private TipoPrenda descripcTipoPrenda;
 
     @ManyToOne
     @JoinColumn(name = "id_estado_prenda", referencedColumnName = "id_estado_prenda")

@@ -48,11 +48,11 @@ public class PrendaController {
         Prenda existente = prendaService.fetchById(id);
         existente.setNombre_prenda(prenda.getNombre_prenda());
         existente.setPrecio(prenda.getPrecio());
-        existente.setStock(prenda.getStock());
+        existente.setDescripcTipoPrenda(prenda.getDescripcTipoPrenda());
         existente.setTalla(prenda.getTalla());
         existente.setColor(prenda.getColor());
         existente.setImagen(prenda.getImagen());
-
+        existente.setEstadoPrenda(prenda.getEstadoPrenda());
         prendaService.save(existente);
         return ResponseEntity.ok(existente);
     }

@@ -20,6 +20,9 @@ public class TipoPrenda {
     @Column(length = 50, nullable = false)
     private String nombre;
 
+    @Column (length = 155 , nullable = false)
+    private String descripcion;
+
     private Long id;
     // other fields, constructors, etc.
 
