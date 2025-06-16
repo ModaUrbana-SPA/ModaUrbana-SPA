@@ -11,6 +11,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.test.context.bean.override.mockito.MockitoBean;
 import org.springframework.test.web.servlet.MockMvc;
 
 import com.example.cl.com.ModaUrbanaSPA.controller.PrendaController;
@@ -22,10 +23,9 @@ import org.springframework.http.MediaType;
 
 @WebMvcTest(PrendaController.class)
 public class PrendaControllerTest {
-    
 
     @Autowired
-    private MockMvc mockMvc; 
+    private MockMvc mockMvc;
 
     @MockBean
     private PrendaService prendaService;
@@ -34,24 +34,24 @@ public class PrendaControllerTest {
     private ObjectMapper objectMapper;
 
     private Prenda prenda;
-    
-    
+
     @BeforeEach
     void setUp() {
 
         prenda = new Prenda();
-        prenda.setId_prenda(    1);
+        prenda.setId_prenda(1);
         prenda.setNombre_prenda("Camisa formal caballero");
         prenda.setPrecio(25000);
-        prenda.setImagen("MONO_HOODIE_ESTAMPADO.PNG " );
+        prenda.setImagen("MONO_HOODIE_ESTAMPADO.PNG ");
         prenda.setColor("Negro");
-        prenda.setTalla("L"); ;
+        prenda.setTalla("L");
+
         prenda.setDescripcTipoPrenda(null); // Asignar un valor válido o null según tu lógica
         prenda.setEstadoPrenda(null); // Asignar un valor válido o null según tu lógica
     }
 
-    //  Listar todas las prendas
-    @Test 
+    // Listar todas las prendas
+    @Test
     public void testGetAllPrendas() throws Exception {
         when(prendaService.findAll()).thenReturn(List.of(prenda));
 
@@ -90,8 +90,8 @@ public class PrendaControllerTest {
         when(prendaService.save(any(Prenda.class))).thenReturn(prenda);
 
         mockMvc.perform(post("/api/prendas")
-                        .contentType(MediaType.APPLICATION_JSON)
-                        .content(objectMapper.writeValueAsString(prenda)))
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(objectMapper.writeValueAsString(prenda)))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.id_prenda").value(1))
                 .andExpect(jsonPath("$.nombre_prenda").value("Camisa formal caballero"))
@@ -109,8 +109,8 @@ public class PrendaControllerTest {
         when(prendaService.save(any(Prenda.class))).thenReturn(prenda);
 
         mockMvc.perform(put("/api/prendas/1")
-                        .contentType(MediaType.APPLICATION_JSON)
-                        .content(objectMapper.writeValueAsString(prenda)))
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(objectMapper.writeValueAsString(prenda)))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.id_prenda").value(1))
                 .andExpect(jsonPath("$.nombre_prenda").value("Camisa formal caballero"))

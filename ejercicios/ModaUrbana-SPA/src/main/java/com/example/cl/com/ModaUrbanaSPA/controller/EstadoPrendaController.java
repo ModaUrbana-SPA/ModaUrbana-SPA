@@ -17,14 +17,14 @@ public class EstadoPrendaController {
 
     @GetMapping
     public ResponseEntity<List<EstadoPrenda>> listar() {
-        List<EstadoPrenda> estados = estadoPrendaService.fetchAll();
+        List<EstadoPrenda> estados = estadoPrendaService.findAll();
         return ResponseEntity.ok(estados);
     }
 
     @GetMapping("/{id}")
     public ResponseEntity<EstadoPrenda> Buscar(@PathVariable Integer id) {
         EstadoPrenda estado = estadoPrendaService.fetchById(id);
-            return ResponseEntity.ok(estado);
+        return ResponseEntity.ok(estado);
     }
 
     @PostMapping
@@ -40,7 +40,7 @@ public class EstadoPrendaController {
             existingEstado.setEstado(estadoPrenda.getEstado());
             return estadoPrendaService.createEstado(existingEstado);
         } else {
-            return null; 
+            return null;
         }
     }
 
@@ -52,6 +52,6 @@ public class EstadoPrendaController {
         } else {
             return ResponseEntity.notFound().build();
         }
-}
+    }
 
 }
