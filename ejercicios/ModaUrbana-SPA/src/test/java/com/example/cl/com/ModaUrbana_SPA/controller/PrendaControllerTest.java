@@ -1,6 +1,13 @@
 package com.example.cl.com.ModaUrbana_SPA.controller;
 
+import static org.mockito.Mockito.*;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
+
+import java.util.List;
+
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
@@ -10,6 +17,8 @@ import com.example.cl.com.ModaUrbanaSPA.controller.PrendaController;
 import com.example.cl.com.ModaUrbanaSPA.model.Prenda;
 import com.example.cl.com.ModaUrbanaSPA.service.PrendaService;
 import com.fasterxml.jackson.databind.ObjectMapper;
+
+import org.springframework.http.MediaType;
 
 @WebMvcTest(PrendaController.class)
 public class PrendaControllerTest {
@@ -40,4 +49,37 @@ public class PrendaControllerTest {
         prenda.setDescripcTipoPrenda(null); // Asignar un valor válido o null según tu lógica
         prenda.setEstadoPrenda(null); // Asignar un valor válido o null según tu lógica
     }
+
+    //  Listar todas las prendas
+    @Test 
+    public void testGetAllPrendas() throws Exception {
+        when(prendaService.findAll()).thenReturn(List.of(prenda));
+        mockMvc.perform(get("/api/prendas"))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$[0].id_prenda").value(1))
+                .andExpect(jsonPath("$[0].nombre_prenda").value("Camisa formal caballero"))
+                .andExpect(jsonPath("$[0].precio").value(25000))
+                .andExpect(jsonPath("$[0].imagen").value("MONO_HOODIE_ESTAMPADO.PNG "))
+                .andExpect(jsonPath("$[0].color").value("Negro"))
+                .andExpect(jsonPath("$[0].talla").value("L"))
+                .andExpect(jsonPath("$[0].descripcTipoPrenda").doesNotExist())
+                .andExpect(jsonPath("$[0].estadoPrenda").doesNotExist());
+    }
+
+    // Buscar una prenda por ID
+    @Test
+    public void testGetPrendaById() throws Exception {
+        when(prendaService.findById(1L)).thenReturn(prenda);
+        mockMvc.perform(get("/api/prendas/1"))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.id_prenda").value(1))
+                .andExpect(jsonPath("$.nombre_prenda").value("Camisa formal caballero"))
+                .andExpect(jsonPath("$.precio").value(25000))
+                .andExpect(jsonPath("$.imagen").value("MONO_HOODIE_ESTAMPADO.PNG "))
+                .andExpect(jsonPath("$.color").value("Negro"))
+                .andExpect(jsonPath("$[0].talla").value("L"))
+                .andExpect(jsonPath("$[0].descripcTipoPrenda").doesNotExist())
+                .andExpect(jsonPath("$[0].estadoPrenda").doesNotExist());
+    }
+
 }
