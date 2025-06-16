@@ -3,7 +3,9 @@ package com.example.cl.com.ModaUrbanaSPA.service;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+
 import org.springframework.stereotype.Service;
+
 import com.example.cl.com.ModaUrbanaSPA.model.TipoPrenda;
 
 @Service
@@ -12,35 +14,33 @@ public class TipoPrendaService {
     private final List<TipoPrenda> tipoPrendas = new ArrayList<>();
     private long nextId = 1;
 
-    public List<TipoPrenda> getAllTipoPrendas() {
+    public List<TipoPrenda> fetchAll() {
         return new ArrayList<>(tipoPrendas);
     }
 
-    public TipoPrenda getTipoPrendaById(Long id) {
-        Optional<TipoPrenda> tipoPrenda = tipoPrendas.stream().filter(tp -> tp.getId().equals(id)).findFirst();
+    public TipoPrenda fetchById(Long id) {
+        Optional<TipoPrenda> tipoPrenda = tipoPrendas.stream()
+                .filter(tp -> tp.getId().equals(id))
+                .findFirst();
         return tipoPrenda.orElse(null);
     }
 
-    public TipoPrenda createTipoPrenda(TipoPrenda tipoPrenda) {
+    public TipoPrenda save(TipoPrenda tipoPrenda) {
         if (tipoPrenda.getId() == null) {
             tipoPrenda.setId(nextId++);
+            tipoPrendas.add(tipoPrenda);
+        } else {
+            TipoPrenda existente = fetchById(tipoPrenda.getId());
+            if (existente != null) {
+                tipoPrendas.remove(existente);
+            }
+            tipoPrendas.add(tipoPrenda);
         }
-        tipoPrendas.add(tipoPrenda);
         return tipoPrenda;
     }
 
-    public TipoPrenda updateTipoPrenda(Long id, TipoPrenda tipoPrenda) {
-        TipoPrenda existing = getTipoPrendaById(id);
-        if (existing != null) {
-            tipoPrendas.remove(existing);
-            tipoPrenda.setId(id);
-            tipoPrendas.add(tipoPrenda);
-            return tipoPrenda;
-        }
-        return null;
-    }
-
-    public boolean deleteTipoPrenda(Long id) {
-        return tipoPrendas.removeIf(tp -> tp.getId().equals(id));
+    public void delete(Long id) {
+        tipoPrendas.removeIf(tp -> tp.getId().equals(id));
     }
 }
+

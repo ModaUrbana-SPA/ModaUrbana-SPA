@@ -1,9 +1,12 @@
 package com.example.cl.com.ModaUrbanaSPA.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import java.util.List;
+
 import com.example.cl.com.ModaUrbanaSPA.model.TipoPrenda;
 import com.example.cl.com.ModaUrbanaSPA.service.TipoPrendaService;
 
@@ -15,42 +18,41 @@ public class TipoPrendaController {
     private TipoPrendaService tipoPrendaService;
 
     @GetMapping
-    public List<TipoPrenda> getAllTipoPrendas() {
-        return tipoPrendaService.getAllTipoPrendas();
+    public ResponseEntity<List<TipoPrenda>> listar() {
+        List<TipoPrenda> tipoPrendas = tipoPrendaService.fetchAll();
+        return ResponseEntity.ok(tipoPrendas);
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<TipoPrenda> getTipoPrendaById(@PathVariable Long id) {
-        TipoPrenda tipoPrenda = tipoPrendaService.getTipoPrendaById(id);
-        if (tipoPrenda != null) {
-            return ResponseEntity.ok(tipoPrenda);
-        } else {
-            return ResponseEntity.notFound().build();
-        }
+    public ResponseEntity<TipoPrenda> buscar(@PathVariable Long id) {
+        TipoPrenda tipoPrenda = tipoPrendaService.fetchById(id);
+        return ResponseEntity.ok(tipoPrenda);
     }
 
     @PostMapping
-    public TipoPrenda createTipoPrenda(@RequestBody TipoPrenda tipoPrenda) {
-        return tipoPrendaService.createTipoPrenda(tipoPrenda);
+    public ResponseEntity<?> guardar(@RequestBody TipoPrenda tipoPrenda) {
+        try {
+            TipoPrenda nuevo = tipoPrendaService.save(tipoPrenda);
+            return ResponseEntity.status(HttpStatus.CREATED).body(nuevo);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body("Error al guardar tipo de prenda: " + e.getMessage());
+        }
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<TipoPrenda> updateTipoPrenda(@PathVariable Long id, @RequestBody TipoPrenda tipoPrenda) {
-        TipoPrenda updated = tipoPrendaService.updateTipoPrenda(id, tipoPrenda);
-        if (updated != null) {
-            return ResponseEntity.ok(updated);
-        } else {
-            return ResponseEntity.notFound().build();
-        }
+    public ResponseEntity<TipoPrenda> actualizar(@PathVariable Long id, @RequestBody TipoPrenda tipoPrenda) {
+        TipoPrenda existente = tipoPrendaService.fetchById(id);
+        existente.setNombre(tipoPrenda.getNombre());
+        existente.setDescripcion(tipoPrenda.getDescripcion());
+        tipoPrendaService.save(existente);
+        return ResponseEntity.ok(existente);
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteTipoPrenda(@PathVariable Long id) {
-        boolean deleted = tipoPrendaService.deleteTipoPrenda(id);
-        if (deleted) {
-            return ResponseEntity.noContent().build();
-        } else {
-            return ResponseEntity.notFound().build();
-        }
+    public ResponseEntity<?> eliminar(@PathVariable Long id) {
+        tipoPrendaService.delete(id);
+        return ResponseEntity.noContent().build();
     }
 }
