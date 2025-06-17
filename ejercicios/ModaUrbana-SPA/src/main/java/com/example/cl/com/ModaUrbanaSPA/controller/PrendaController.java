@@ -20,14 +20,14 @@ public class PrendaController {
     // Método GET actualizado
     @GetMapping
     public ResponseEntity<List<Prenda>> listar() {
-        List<Prenda> prendas = prendaService.fetchAll();
+        List<Prenda> prendas = prendaService.findAll();
         // Elimina el 404 en caso de lista vacía
         return ResponseEntity.ok(prendas);
     }
 
     @GetMapping("/{id}")
     public ResponseEntity<Prenda> buscar(@PathVariable Long id) {
-        Prenda prenda = prendaService.fetchById(id);
+        Prenda prenda = prendaService.findById(id);
         return ResponseEntity.ok(prenda);
     }
 
@@ -45,7 +45,7 @@ public class PrendaController {
 
     @PutMapping("/{id}")
     public ResponseEntity<Prenda> actualizar(@PathVariable Long id, @RequestBody Prenda prenda) {
-        Prenda existente = prendaService.fetchById(id);
+        Prenda existente = prendaService.findById(id);
         existente.setNombre_prenda(prenda.getNombre_prenda());
         existente.setPrecio(prenda.getPrecio());
         existente.setDescripcTipoPrenda(prenda.getDescripcTipoPrenda());
@@ -59,7 +59,7 @@ public class PrendaController {
 
     @DeleteMapping("/{id}")
     public ResponseEntity<?> eliminar(@PathVariable Long id) {
-        prendaService.delete(id);
+        prendaService.deleteById(id);
         return ResponseEntity.noContent().build();
     }
 }

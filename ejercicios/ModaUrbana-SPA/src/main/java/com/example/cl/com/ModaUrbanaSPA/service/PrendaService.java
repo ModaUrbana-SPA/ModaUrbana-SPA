@@ -14,20 +14,19 @@ public class PrendaService {
     @Autowired
     private PrendaRepositorio prendaRepository;
 
-    public List<Prenda> fetchAll() {
+    public List<Prenda> findAll() {
         return prendaRepository.findAll();
-    }
+    }   // Antes era fetchAll()
 
-    public Prenda fetchById(Long id) {
-        return prendaRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Prenda no encontrada"));
-    }
+    public Prenda findById(Long id) {
+        return prendaRepository.findById(id).orElse(null);
+    }   // Lo dejé como el profe. Antes estaba así orElseThrow(() -> new RuntimeException("Prenda no encontrada"));
 
     public Prenda save(Prenda prenda) {
         return prendaRepository.save(prenda);
     }
 
-    public void delete(Long id) {
+    public void deleteById(Long id) {
         prendaRepository.deleteById(id);
     }
 }
