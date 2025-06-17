@@ -18,7 +18,7 @@ public class PrendaService {
         return prendaRepository.findAll();
     }   // Antes era fetchAll()
 
-    public Prenda findById(Long id) {
+    public Prenda findById(Integer id) {
         return prendaRepository.findById(id).orElse(null);
     }   // Lo dejé como el profe. Antes estaba así orElseThrow(() -> new RuntimeException("Prenda no encontrada"));
 
@@ -26,7 +26,7 @@ public class PrendaService {
         return prendaRepository.save(prenda);
     }
 
-    public void deleteById(Long id) {
+    public void deleteById(Integer id) {
         prendaRepository.deleteById(id);
     }
 }
