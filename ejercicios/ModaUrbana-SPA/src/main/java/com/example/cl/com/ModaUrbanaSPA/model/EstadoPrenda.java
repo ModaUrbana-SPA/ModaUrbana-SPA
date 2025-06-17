@@ -13,10 +13,11 @@ public class EstadoPrenda {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id_estado_prenda;
+    @Column(name = "id_estado_prenda")
+    private Integer idEstadoPrenda;
 
-    @Column(nullable = false)
-    private LocalDateTime hora_llegada;
+    @Column(name = "hora_llegada", nullable = false)
+    private LocalDateTime horaLlegada;
 
     @Column(length = 50, nullable = false)
     private String estado;

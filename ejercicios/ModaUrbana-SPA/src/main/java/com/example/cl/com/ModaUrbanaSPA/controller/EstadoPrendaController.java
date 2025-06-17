@@ -17,13 +17,13 @@ public class EstadoPrendaController {
 
     @GetMapping
     public ResponseEntity<List<EstadoPrenda>> listar() {
-        List<EstadoPrenda> estados = estadoPrendaService.fetchAll();
+        List<EstadoPrenda> estados = estadoPrendaService.findAll();
         return ResponseEntity.ok(estados);
     }
 
     @GetMapping("/{id}")
     public ResponseEntity<EstadoPrenda> Buscar(@PathVariable Integer id) {
-        EstadoPrenda estado = estadoPrendaService.fetchById(id);
+        EstadoPrenda estado = estadoPrendaService.findEstadoById(id);
             return ResponseEntity.ok(estado);
     }
 
@@ -34,7 +34,7 @@ public class EstadoPrendaController {
 
     @PutMapping("/{id}")
     public EstadoPrenda updateEstado(@PathVariable Integer id, @RequestBody EstadoPrenda estadoPrenda) {
-        EstadoPrenda existingEstado = estadoPrendaService.getEstadoById(id);
+        EstadoPrenda existingEstado = estadoPrendaService.findEstadoById(id);
         if (existingEstado != null) {
             existingEstado.setHoraLlegada(estadoPrenda.getHoraLlegada());
             existingEstado.setEstado(estadoPrenda.getEstado());

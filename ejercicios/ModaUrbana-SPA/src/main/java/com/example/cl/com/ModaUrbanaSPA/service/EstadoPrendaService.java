@@ -26,6 +26,15 @@ public class EstadoPrendaService {
         return estadoPrendaRepositorio.save(estadoPrenda);
     }
 
+    public EstadoPrenda updateEstado(Integer id, EstadoPrenda estadoPrenda) {
+        if (estadoPrendaRepositorio.existsById(id.longValue())) {
+            estadoPrenda.setId(id.longValue());
+            return estadoPrendaRepositorio.save(estadoPrenda);
+        } else {
+            return null; // O lanzar una excepción si prefieres
+        }
+    }
+
     public boolean deleteEstado(Integer id) {
         if (estadoPrendaRepositorio.existsById(id.longValue())) {
             estadoPrendaRepositorio.deleteById(id.longValue());
