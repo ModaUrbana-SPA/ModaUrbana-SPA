@@ -24,7 +24,7 @@ public class EstadoPrendaController {
     @GetMapping("/{id}")
     public ResponseEntity<EstadoPrenda> Buscar(@PathVariable Integer id) {
         EstadoPrenda estado = estadoPrendaService.findEstadoById(id);
-            return ResponseEntity.ok(estado);
+        return ResponseEntity.ok(estado);
     }
 
     @PostMapping

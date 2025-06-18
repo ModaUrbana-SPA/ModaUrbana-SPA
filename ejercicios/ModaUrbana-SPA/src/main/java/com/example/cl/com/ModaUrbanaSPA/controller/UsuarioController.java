@@ -4,6 +4,7 @@ import com.example.cl.com.ModaUrbanaSPA.model.Usuario;
 import com.example.cl.com.ModaUrbanaSPA.repository.UsuarioRepositorio;
 
 import java.util.List;
+import org.springframework.security.access.prepost.PreAuthorize;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
