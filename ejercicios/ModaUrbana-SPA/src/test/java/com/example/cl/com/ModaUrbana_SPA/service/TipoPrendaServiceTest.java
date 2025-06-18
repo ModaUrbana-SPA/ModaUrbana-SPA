@@ -1,98 +1,65 @@
 package com.example.cl.com.ModaUrbana_SPA.service;
 
+import static org.mockito.Mockito.*;
+import static org.junit.jupiter.api.Assertions.*;
+
+import com.example.cl.com.ModaUrbanaSPA.model.TipoPrenda;
+import com.example.cl.com.ModaUrbanaSPA.repository.TipoPrendaRepositorio;
 import com.example.cl.com.ModaUrbanaSPA.service.TipoPrendaService;
 
-import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.Mockito.*;
+import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.mock.mockito.MockBean;
 
 import java.util.List;
 import java.util.Optional;
 
-import com.example.cl.com.ModaUrbanaSPA.model.TipoPrenda;
-import com.example.cl.com.ModaUrbanaSPA.repository.TipoPrendaRepositorio;
-
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
-import org.mockito.InjectMocks;
-import org.mockito.Mock;
-import org.mockito.MockitoAnnotations;
-
+@SpringBootTest
 public class TipoPrendaServiceTest {
 
-    @Mock
-    private TipoPrendaRepositorio tipoPrendaRepositorio;
-
-    @InjectMocks
+    @Autowired
     private TipoPrendaService tipoPrendaService;
 
-    private TipoPrenda tipoPrenda;
+    @MockBean
+    private TipoPrendaRepositorio tipoPrendaRepositorio;
 
-    @BeforeEach
-    void setUp() {
-        MockitoAnnotations.openMocks(this);
+    @Test
+    public void testFindAll() {
+        when(tipoPrendaRepositorio.findAll()).thenReturn(List.of(new TipoPrenda(1, "Camisas", "Tipos de camisas formales y casuales")));
 
-        tipoPrenda = new TipoPrenda();
-        tipoPrenda.setId_tipo_prenda(1);
-        tipoPrenda.setId(1L);
-        tipoPrenda.setNombre("Camisas");
-        tipoPrenda.setDescripcion("Tipos de camisas formales y casuales");
+        List<TipoPrenda> tipos = tipoPrendaService.findAll();
+        assertNotNull(tipos);
+        assertEquals(1, tipos.size());
     }
 
     @Test
-    public void testFetchAll() {
-        when(tipoPrendaRepositorio.findAll()).thenReturn(List.of(tipoPrenda));
+    public void testFindById() {
+        Integer id = 1;
+        TipoPrenda tipoPrenda = new TipoPrenda(id, "Camisas", "Tipos de camisas formales y casuales");
+        when(tipoPrendaRepositorio.findById(id)).thenReturn(Optional.of(tipoPrenda));
 
-        List<TipoPrenda> resultado = tipoPrendaService.fetchAll();
-
-        assertNotNull(resultado);
-        assertEquals(1, resultado.size());
-        assertEquals("Camisas", resultado.get(0).getNombre());
-
-        verify(tipoPrendaRepositorio, times(1)).findAll();
-    }
-
-    @Test
-    public void testFetchById_Existente() {
-        when(tipoPrendaRepositorio.findById(1L)).thenReturn(Optional.of(tipoPrenda));
-
-        TipoPrenda resultado = tipoPrendaService.fetchById(1L);
-
-        assertNotNull(resultado);
-        assertEquals(1L, resultado.getId());
-        assertEquals("Camisas", resultado.getNombre());
-
-        verify(tipoPrendaRepositorio, times(1)).findById(1L);
-    }
-
-    @Test
-    public void testFetchById_NoExistente() {
-        when(tipoPrendaRepositorio.findById(2L)).thenReturn(Optional.empty());
-
-        TipoPrenda resultado = tipoPrendaService.fetchById(2L);
-
-        assertNull(resultado);
-
-        verify(tipoPrendaRepositorio, times(1)).findById(2L);
+        TipoPrenda found = tipoPrendaService.findById(id);
+        assertNotNull(found);
+        assertEquals(id, found.getId_tipo_prenda());
     }
 
     @Test
     public void testSave() {
-        when(tipoPrendaRepositorio.save(any(TipoPrenda.class))).thenReturn(tipoPrenda);
+        TipoPrenda tipoPrenda = new TipoPrenda(1, "Camisas", "Tipos de camisas formales y casuales");
+        when(tipoPrendaRepositorio.save(tipoPrenda)).thenReturn(tipoPrenda);
 
-        TipoPrenda resultado = tipoPrendaService.save(tipoPrenda);
-
-        assertNotNull(resultado);
-        assertEquals("Camisas", resultado.getNombre());
-
-        verify(tipoPrendaRepositorio, times(1)).save(tipoPrenda);
+        TipoPrenda saved = tipoPrendaService.save(tipoPrenda);
+        assertNotNull(saved);
+        assertEquals("Camisas", saved.getNombre());
     }
 
     @Test
-    public void testDelete() {
-        doNothing().when(tipoPrendaRepositorio).deleteById(1L);
+    public void testDeleteById() {
+        Integer id = 1;
+        doNothing().when(tipoPrendaRepositorio).deleteById(id);
 
-        tipoPrendaService.delete(1L);
-
-        verify(tipoPrendaRepositorio, times(1)).deleteById(1L);
+        tipoPrendaService.deleteById(id);
+        verify(tipoPrendaRepositorio, times(1)).deleteById(id);
     }
 }

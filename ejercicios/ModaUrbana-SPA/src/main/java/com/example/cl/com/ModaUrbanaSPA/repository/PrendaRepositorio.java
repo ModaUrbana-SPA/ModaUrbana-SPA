@@ -6,6 +6,6 @@ import org.springframework.stereotype.Repository;
 import com.example.cl.com.ModaUrbanaSPA.model.Prenda;
 
 @Repository
-public interface PrendaRepositorio extends JpaRepository<Prenda, Integer> { // antes era Long pero estaba weando error
+public interface PrendaRepositorio extends JpaRepository<Prenda, Integer> {
 
 }

@@ -38,73 +38,65 @@ public class TipoPrendaControllerTest {
     void setUp() {
         tipoPrenda = new TipoPrenda();
         tipoPrenda.setId_tipo_prenda(1);
-        tipoPrenda.setId(1L);
         tipoPrenda.setNombre("Camisas");
         tipoPrenda.setDescripcion("Tipos de camisas formales y casuales");
     }
 
     @Test
-    public void testListarTipoPrendas() throws Exception {
-        when(tipoPrendaService.fetchAll()).thenReturn(List.of(tipoPrenda));
+    public void testGetAllTipoPrendas() throws Exception {
+        when(tipoPrendaService.findAll()).thenReturn(List.of(tipoPrenda));
 
-        mockMvc.perform(get("/api/tipo-prenda"))
+        mockMvc.perform(get("/api/tipoPrendas"))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$[0].id_tipo_prenda").value(1))
-                .andExpect(jsonPath("$[0].id").value(1))
                 .andExpect(jsonPath("$[0].nombre").value("Camisas"))
                 .andExpect(jsonPath("$[0].descripcion").value("Tipos de camisas formales y casuales"));
     }
 
     @Test
-    public void testBuscarTipoPrendaPorId() throws Exception {
-        when(tipoPrendaService.fetchById(1L)).thenReturn(tipoPrenda);
+    public void testGetTipoPrendaById() throws Exception {
+        when(tipoPrendaService.findById(1)).thenReturn(tipoPrenda);
 
-        mockMvc.perform(get("/api/tipo-prenda/1"))
+        mockMvc.perform(get("/api/tipoPrendas/1"))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.id_tipo_prenda").value(1))
-                .andExpect(jsonPath("$.id").value(1))
                 .andExpect(jsonPath("$.nombre").value("Camisas"))
                 .andExpect(jsonPath("$.descripcion").value("Tipos de camisas formales y casuales"));
     }
 
     @Test
-    public void testCrearTipoPrenda() throws Exception {
+    public void testCreateTipoPrenda() throws Exception {
         when(tipoPrendaService.save(any(TipoPrenda.class))).thenReturn(tipoPrenda);
 
-        mockMvc.perform(post("/api/tipo-prenda")
-                .contentType(MediaType.APPLICATION_JSON)
-                .content(objectMapper.writeValueAsString(tipoPrenda)))
-                .andExpect(status().isCreated())
-                .andExpect(jsonPath("$.id_tipo_prenda").value(1))
-                .andExpect(jsonPath("$.id").value(1))
-                .andExpect(jsonPath("$.nombre").value("Camisas"))
-                .andExpect(jsonPath("$.descripcion").value("Tipos de camisas formales y casuales"));
-    }
-
-    @Test
-    public void testActualizarTipoPrenda() throws Exception {
-        when(tipoPrendaService.fetchById(1L)).thenReturn(tipoPrenda);
-        when(tipoPrendaService.save(any(TipoPrenda.class))).thenReturn(tipoPrenda);
-
-        mockMvc.perform(put("/api/tipo-prenda/1")
-                .contentType(MediaType.APPLICATION_JSON)
-                .content(objectMapper.writeValueAsString(tipoPrenda)))
+        mockMvc.perform(post("/api/tipoPrendas")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(objectMapper.writeValueAsString(tipoPrenda)))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.id_tipo_prenda").value(1))
-                .andExpect(jsonPath("$.id").value(1))
                 .andExpect(jsonPath("$.nombre").value("Camisas"))
                 .andExpect(jsonPath("$.descripcion").value("Tipos de camisas formales y casuales"));
     }
 
     @Test
-    public void testEliminarTipoPrenda() throws Exception {
-        doNothing().when(tipoPrendaService).delete(1L);
+    public void testUpdateTipoPrenda() throws Exception {
+        when(tipoPrendaService.save(any(TipoPrenda.class))).thenReturn(tipoPrenda);
 
-        mockMvc.perform(delete("/api/tipo-prenda/1"))
-                .andExpect(status().isNoContent());
+        mockMvc.perform(put("/api/tipoPrendas/1")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(objectMapper.writeValueAsString(tipoPrenda)))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.id_tipo_prenda").value(1))
+                .andExpect(jsonPath("$.nombre").value("Camisas"))
+                .andExpect(jsonPath("$.descripcion").value("Tipos de camisas formales y casuales"));
+    }
 
-        verify(tipoPrendaService, times(1)).delete(1L);
+    @Test
+    public void testDeleteTipoPrenda() throws Exception {
+        doNothing().when(tipoPrendaService).deleteById(1);
+
+        mockMvc.perform(delete("/api/tipoPrendas/1"))
+                .andExpect(status().isOk());
+
+        verify(tipoPrendaService, times(1)).deleteById(1);
     }
 }
-
-
