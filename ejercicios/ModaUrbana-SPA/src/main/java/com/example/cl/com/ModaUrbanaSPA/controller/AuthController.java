@@ -4,7 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import com.example.cl.com.ModaUrbanaSPA.model.Usuario;
+import com.example.cl.com.ModaUrbanaSPA.dto.LoginRequest;
 import com.example.cl.com.ModaUrbanaSPA.service.AuthService;
 
 @RestController
@@ -15,8 +15,10 @@ public class AuthController {
     private AuthService authService;
 
     @PostMapping("/login")
-    public ResponseEntity<String> login(@RequestBody Usuario usuario) {
-        String token = authService.login(usuario.getNombreUsuario(), usuario.getContraseña());
+    public ResponseEntity<String> login(@RequestBody LoginRequest loginRequest) {
+        String token = authService.login(
+                loginRequest.getNombreUsuario(),
+                loginRequest.getContraseña());
         return ResponseEntity.ok(token);
     }
 
