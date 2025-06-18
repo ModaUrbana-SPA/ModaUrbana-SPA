@@ -14,7 +14,7 @@ public class EstadoPrenda {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_estado_prenda")
-    private Integer idEstadoPrenda;
+    private Integer id_estado_prenda; 
 
     @Column(name = "hora_llegada", nullable = false)
     private LocalDateTime horaLlegada;
@@ -22,3 +22,4 @@ public class EstadoPrenda {
     @Column(length = 50, nullable = false)
     private String estado;
 }
+

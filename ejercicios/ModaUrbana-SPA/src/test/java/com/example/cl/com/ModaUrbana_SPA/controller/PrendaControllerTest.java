@@ -45,7 +45,6 @@ public class PrendaControllerTest {
         prenda.setImagen("MONO_HOODIE_ESTAMPADO.PNG ");
         prenda.setColor("Negro");
         prenda.setTalla("L");
-
         prenda.setDescripcTipoPrenda(null); // Asignar un valor válido o null según tu lógica
         prenda.setEstadoPrenda(null); // Asignar un valor válido o null según tu lógica
     }
@@ -70,7 +69,7 @@ public class PrendaControllerTest {
     // Buscar una prenda por ID
     @Test
     public void testGetPrendaById() throws Exception {
-        when(prendaService.findById(1L)).thenReturn(prenda);
+        when(prendaService.findById(1)).thenReturn(prenda);
 
         mockMvc.perform(get("/api/prendas/1"))
                 .andExpect(status().isOk())
@@ -125,12 +124,12 @@ public class PrendaControllerTest {
     // Eliminar una prenda por ID
     @Test
     public void testDeletePrenda() throws Exception {
-        doNothing().when(prendaService).deleteById(1L); // por qué si pongo id:1 no funciona?
+        doNothing().when(prendaService).deleteById(1); // por qué si pongo id:1 no funciona?
 
         mockMvc.perform(delete("/api/prendas/1"))
                 .andExpect(status().isOk());
 
-        verify(prendaService, times(1)).deleteById(1L);
+        verify(prendaService, times(1)).deleteById(1);
     }
 
 }

@@ -9,7 +9,6 @@ import lombok.*;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-// DATA
 @Entity
 @Table(name = "TIPO_PRENDA")
 public class TipoPrenda {
@@ -22,15 +21,4 @@ public class TipoPrenda {
 
     @Column (length = 155 , nullable = false)
     private String descripcion;
-
-    private Long id;
-    // other fields, constructors, etc.
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
 }

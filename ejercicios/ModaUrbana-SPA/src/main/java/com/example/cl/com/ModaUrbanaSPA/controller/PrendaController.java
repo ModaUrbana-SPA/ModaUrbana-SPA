@@ -26,7 +26,7 @@ public class PrendaController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Prenda> buscar(@PathVariable Long id) {
+    public ResponseEntity<Prenda> buscar(@PathVariable Integer id) {
         Prenda prenda = prendaService.findById(id);
         return ResponseEntity.ok(prenda);
     }
@@ -44,7 +44,7 @@ public class PrendaController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Prenda> actualizar(@PathVariable Long id, @RequestBody Prenda prenda) {
+    public ResponseEntity<Prenda> actualizar(@PathVariable Integer id, @RequestBody Prenda prenda) {
         Prenda existente = prendaService.findById(id);
         existente.setNombre_prenda(prenda.getNombre_prenda());
         existente.setPrecio(prenda.getPrecio());
@@ -58,7 +58,7 @@ public class PrendaController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<?> eliminar(@PathVariable Long id) {
+    public ResponseEntity<?> eliminar(@PathVariable Integer id) {
         prendaService.deleteById(id);
         return ResponseEntity.noContent().build();
     }

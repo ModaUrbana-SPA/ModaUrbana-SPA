@@ -1,46 +1,31 @@
 package com.example.cl.com.ModaUrbanaSPA.service;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
-
+import com.example.cl.com.ModaUrbanaSPA.model.TipoPrenda;
+import com.example.cl.com.ModaUrbanaSPA.repository.TipoPrendaRepositorio;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.example.cl.com.ModaUrbanaSPA.model.TipoPrenda;
+import java.util.List;
 
 @Service
 public class TipoPrendaService {
+    @Autowired
+    private TipoPrendaRepositorio tipoPrendaRepositorio;
 
-    private final List<TipoPrenda> tipoPrendas = new ArrayList<>();
-    private long nextId = 1;
-
-    public List<TipoPrenda> fetchAll() {
-        return new ArrayList<>(tipoPrendas);
+    public List<TipoPrenda> findAll() {
+        return tipoPrendaRepositorio.findAll();
     }
 
-    public TipoPrenda fetchById(Long id) {
-        Optional<TipoPrenda> tipoPrenda = tipoPrendas.stream()
-                .filter(tp -> tp.getId().equals(id))
-                .findFirst();
-        return tipoPrenda.orElse(null);
+    public TipoPrenda findById(Integer id) {
+        return tipoPrendaRepositorio.findById(id).orElse(null);
     }
 
     public TipoPrenda save(TipoPrenda tipoPrenda) {
-        if (tipoPrenda.getId() == null) {
-            tipoPrenda.setId(nextId++);
-            tipoPrendas.add(tipoPrenda);
-        } else {
-            TipoPrenda existente = fetchById(tipoPrenda.getId());
-            if (existente != null) {
-                tipoPrendas.remove(existente);
-            }
-            tipoPrendas.add(tipoPrenda);
-        }
-        return tipoPrenda;
+        return tipoPrendaRepositorio.save(tipoPrenda);
     }
 
-    public void delete(Long id) {
-        tipoPrendas.removeIf(tp -> tp.getId().equals(id));
+    public void deleteById(Integer id) {
+        tipoPrendaRepositorio.deleteById(id);
     }
 }
 

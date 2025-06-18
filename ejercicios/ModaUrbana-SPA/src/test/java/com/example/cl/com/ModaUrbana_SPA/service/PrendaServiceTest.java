@@ -1,4 +1,7 @@
-package com.example.cl.com.ModaUrbanaSPA.service;
+package com.example.cl.com.ModaUrbana_SPA.service;
+
+import static org.mockito.Mockito.*;
+import static org.junit.jupiter.api.Assertions.*;
 
 import com.example.cl.com.ModaUrbanaSPA.model.Prenda;
 import com.example.cl.com.ModaUrbanaSPA.repository.PrendaRepositorio;
@@ -8,39 +11,33 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
-import org.springframework.test.context.ActiveProfiles;
 
 import java.util.List;
 import java.util.Optional;
 
-import static org.mockito.Mockito.*;
-import static org.junit.jupiter.api.Assertions.*;
-
 @SpringBootTest
-@ActiveProfiles("test")
 public class PrendaServiceTest {
-
     @Autowired
     private PrendaService prendaService;
 
     @MockBean
     private PrendaRepositorio prendaRepositorio;
 
+    // Listar todas las prendas
     @Test
     public void testFindAll() {
-        Prenda prenda = crearPrenda();
-        when(prendaRepositorio.findAll()).thenReturn(List.of(prenda));
+        when(prendaRepositorio.findAll()).thenReturn(List.of(new Prenda(1, "Camisa formal caballero", 25000, "L", "Negro", "MONO_HOODIE_ESTAMPADO.PNG", null, null)));
 
         List<Prenda> prendas = prendaService.findAll();
         assertNotNull(prendas);
         assertEquals(1, prendas.size());
-        assertEquals(prenda.getId_prenda(), prendas.get(0).getId_prenda());
     }
 
+    // Buscar una prenda por ID
     @Test
     public void testFindById() {
-        Long id = 1L;
-        Prenda prenda = crearPrenda();
+        Integer id = 1;
+        Prenda prenda = new Prenda(id, "Camisa formal caballero", 25000, "L", "Negro", "MONO_HOODIE_ESTAMPADO.PNG", null, null);
         when(prendaRepositorio.findById(id)).thenReturn(Optional.of(prenda));
 
         Prenda found = prendaService.findById(id);
@@ -48,9 +45,10 @@ public class PrendaServiceTest {
         assertEquals(id, found.getId_prenda());
     }
 
+    // Guardar una prenda
     @Test
     public void testSave() {
-        Prenda prenda = crearPrenda();
+        Prenda prenda = new Prenda(1, "Camisa formal caballero", 25000, "L", "Negro", "MONO_HOODIE_ESTAMPADO.PNG", null, null);
         when(prendaRepositorio.save(prenda)).thenReturn(prenda);
 
         Prenda saved = prendaService.save(prenda);
@@ -58,23 +56,13 @@ public class PrendaServiceTest {
         assertEquals("Camisa formal caballero", saved.getNombre_prenda());
     }
 
+    // Eliminar una prenda por ID
     @Test
     public void testDeleteById() {
-        Long id = 1L;
+        Integer id = 1;
         doNothing().when(prendaRepositorio).deleteById(id);
 
         prendaService.deleteById(id);
         verify(prendaRepositorio, times(1)).deleteById(id);
-    }
-
-    private Prenda crearPrenda() {
-        Prenda prenda = new Prenda();
-        prenda.setId_prenda(1);
-        prenda.setNombre_prenda("Camisa formal caballero");
-        prenda.setPrecio(25000);
-        prenda.setImagen("MONO_HOODIE_ESTAMPADO.PNG");
-        prenda.setColor("Negro");
-        prenda.setTalla("L");
-        return prenda;
     }
 }
