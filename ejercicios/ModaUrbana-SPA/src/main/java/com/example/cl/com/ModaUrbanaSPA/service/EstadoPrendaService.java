@@ -28,14 +28,14 @@ public class EstadoPrendaService {
 
     public EstadoPrenda updateEstado(Integer id, EstadoPrenda estadoPrenda) {
         if (estadoPrendaRepositorio.existsById(id.longValue())) {
-            estadoPrenda.setId(id);
+            estadoPrenda.setId_estado_prenda(id);
             return estadoPrendaRepositorio.save(estadoPrenda);
         } else {
             return null; 
         }
     }
 
-    public boolean deleteEstado(Integer id) {
+    public boolean deleteById(Integer id) {
         if (estadoPrendaRepositorio.existsById(id.longValue())) {
             estadoPrendaRepositorio.deleteById(id.longValue());
             return true;
