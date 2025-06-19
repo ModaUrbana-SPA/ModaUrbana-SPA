@@ -35,7 +35,7 @@ public class EstadoPrendaService {
         }
     }
 
-    public boolean deleteEstado(Integer id) {
+    public boolean deleteById(Integer id) {
         if (estadoPrendaRepositorio.existsById(id.longValue())) {
             estadoPrendaRepositorio.deleteById(id.longValue());
             return true;

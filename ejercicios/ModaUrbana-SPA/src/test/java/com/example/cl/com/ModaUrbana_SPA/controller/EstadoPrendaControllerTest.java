@@ -94,7 +94,7 @@ public class EstadoPrendaControllerTest {
     }
 
     @Test
-    public void testEliminar() throws Exception {
+    public void testDeleteEstado() throws Exception {
         doNothing().when(estadoPrendaService).deleteById(1);
 
         mockMvc.perform(delete("/api/estado-prenda/1"))

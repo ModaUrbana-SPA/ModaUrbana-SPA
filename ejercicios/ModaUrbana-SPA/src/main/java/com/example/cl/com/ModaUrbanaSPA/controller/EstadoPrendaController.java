@@ -46,7 +46,7 @@ public class EstadoPrendaController {
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteEstado(@PathVariable Integer id) {
-        boolean deleted = estadoPrendaService.deleteEstado(id);
+        boolean deleted = estadoPrendaService.deleteById(id);
         if (deleted) {
             return ResponseEntity.noContent().build();
         } else {
