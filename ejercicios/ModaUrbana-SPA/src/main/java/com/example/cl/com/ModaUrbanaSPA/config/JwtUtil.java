@@ -1,4 +1,4 @@
-package com.example.cl.com.ModaUrbanaSPA;
+package com.example.cl.com.ModaUrbanaSPA.config;
 
 import java.security.Key;
 import java.util.Date;

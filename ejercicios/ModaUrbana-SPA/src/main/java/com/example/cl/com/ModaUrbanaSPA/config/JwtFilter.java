@@ -1,4 +1,4 @@
-package com.example.cl.com.ModaUrbanaSPA;
+package com.example.cl.com.ModaUrbanaSPA.config;
 
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
@@ -10,6 +10,7 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
+
 import io.jsonwebtoken.Claims;
 
 import java.io.IOException;
@@ -33,7 +34,7 @@ public class JwtFilter extends OncePerRequestFilter {
             FilterChain filterChain) throws ServletException, IOException {
 
         String path = request.getRequestURI();
-        System.out.println("🔍 Ruta interceptada por JwtFilter: " + path);
+        System.out.println("Ruta interceptada por JwtFilter: " + path);
 
         if (path.startsWith("/api/auth")) {
             System.out.println(" Login o auth libre, no se aplica filtro");

@@ -16,5 +16,6 @@ public class PrendaModelAssembler implements RepresentationModelAssembler<Prenda
         return EntityModel.of(prenda,
                 linkTo(methodOn(PrendaControllerV2.class).obtenerPorId(prenda.getId_prenda())).withSelfRel(),
                 linkTo(methodOn(PrendaControllerV2.class).listarTodas()).withRel("prendas"));
+                linkTo(methodOn(PrendaControllerV2.class).buscarPorTipo().withRel())
     }
 }

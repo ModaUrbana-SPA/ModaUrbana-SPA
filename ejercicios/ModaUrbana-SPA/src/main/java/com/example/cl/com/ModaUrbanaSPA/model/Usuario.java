@@ -9,7 +9,7 @@ import lombok.*;
 @AllArgsConstructor
 @Table(name = "USUARIO")
 public class Usuario {
-
+    
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;

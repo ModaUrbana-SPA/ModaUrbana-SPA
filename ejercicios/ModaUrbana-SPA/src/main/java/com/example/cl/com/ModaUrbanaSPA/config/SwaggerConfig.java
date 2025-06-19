@@ -1,4 +1,4 @@
-package com.example.cl.com.ModaUrbanaSPA;
+package com.example.cl.com.ModaUrbanaSPA.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

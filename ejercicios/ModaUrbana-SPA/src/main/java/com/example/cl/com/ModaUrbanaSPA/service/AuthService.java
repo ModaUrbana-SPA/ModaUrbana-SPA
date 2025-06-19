@@ -3,7 +3,7 @@ package com.example.cl.com.ModaUrbanaSPA.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.example.cl.com.ModaUrbanaSPA.JwtUtil;
+import com.example.cl.com.ModaUrbanaSPA.config.JwtUtil;
 import com.example.cl.com.ModaUrbanaSPA.model.Usuario;
 import com.example.cl.com.ModaUrbanaSPA.repository.UsuarioRepositorio;
 
