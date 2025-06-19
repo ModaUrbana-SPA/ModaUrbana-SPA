@@ -42,7 +42,7 @@ public class EstadoPrendaControllerTest {
         estadoPrenda = new EstadoPrenda();
         estadoPrenda.setId_estado_prenda(1);
         estadoPrenda.setHoraLlegada(LocalDateTime.now());
-        estadoPrenda.setEstado("Disponible"); 
+        estadoPrenda.setEstado("Disponible");
     }
 
     @Test
@@ -99,9 +99,8 @@ public class EstadoPrendaControllerTest {
 
         mockMvc.perform(delete("/api/estado-prenda/1"))
                 .andExpect(status().isOk());
-    
+
         verify(estadoPrendaService, times(1)).deleteById(1);
 
     }
 }
-
