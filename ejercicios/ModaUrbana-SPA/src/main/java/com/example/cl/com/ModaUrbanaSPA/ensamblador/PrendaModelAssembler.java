@@ -14,8 +14,11 @@ public class PrendaModelAssembler implements RepresentationModelAssembler<Prenda
     @Override
     public EntityModel<Prenda> toModel(Prenda prenda) {
         return EntityModel.of(prenda,
-                linkTo(methodOn(PrendaControllerV2.class).obtenerPorId(prenda.getId_prenda())).withSelfRel(),
-                linkTo(methodOn(PrendaControllerV2.class).listarTodas()).withRel("prendas"));
-                linkTo(methodOn(PrendaControllerV2.class).buscarPorTipo().withRel())
+                linkTo(methodOn(PrendaControllerV2.class).getPrendabyId(prenda.getId_prenda())).withSelfRel(),
+                linkTo(methodOn(PrendaControllerV2.class).getlistarTodas()).withRel("prendas"),
+                linkTo(methodOn(PrendaControllerV2.class).actualizar(prenda.getId_prenda(), prenda))
+                        .withRel("actualizar"),
+                linkTo(methodOn(PrendaControllerV2.class).deletePrenda(prenda.getId_prenda())).withRel("eliminar"));
+
     }
 }

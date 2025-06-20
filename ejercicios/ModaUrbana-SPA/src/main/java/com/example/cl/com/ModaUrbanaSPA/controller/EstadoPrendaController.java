@@ -36,7 +36,6 @@ public class EstadoPrendaController {
     public EstadoPrenda updateEstado(@PathVariable Integer id, @RequestBody EstadoPrenda estadoPrenda) {
         EstadoPrenda existingEstado = estadoPrendaService.findEstadoById(id);
         if (existingEstado != null) {
-            existingEstado.setHoraLlegada(estadoPrenda.getHoraLlegada());
             existingEstado.setEstado(estadoPrenda.getEstado());
             return estadoPrendaService.createEstado(existingEstado);
         } else {

@@ -23,6 +23,9 @@ public class Prenda {
     @Column(nullable = false)
     private String talla;
 
+    @Column(length = 50, nullable = false)
+    private Integer stock;
+
     @Column(nullable = false)
     private String color;
 

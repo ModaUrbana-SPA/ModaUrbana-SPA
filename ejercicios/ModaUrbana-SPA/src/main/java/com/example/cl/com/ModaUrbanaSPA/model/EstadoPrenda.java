@@ -2,7 +2,6 @@ package com.example.cl.com.ModaUrbanaSPA.model;
 
 import jakarta.persistence.*;
 import lombok.*;
-import java.time.LocalDateTime;
 
 @Data
 @NoArgsConstructor
@@ -14,12 +13,8 @@ public class EstadoPrenda {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_estado_prenda")
-    private Integer id_estado_prenda; 
-
-    @Column(name = "hora_llegada", nullable = false)
-    private LocalDateTime horaLlegada;
+    private Integer id_estado_prenda;
 
     @Column(length = 50, nullable = false)
     private String estado;
 }
-

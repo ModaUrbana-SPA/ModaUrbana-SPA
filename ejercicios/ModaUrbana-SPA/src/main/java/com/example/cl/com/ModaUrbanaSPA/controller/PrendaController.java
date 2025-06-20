@@ -49,6 +49,7 @@ public class PrendaController {
         existente.setNombre_prenda(prenda.getNombre_prenda());
         existente.setPrecio(prenda.getPrecio());
         existente.setDescripcTipoPrenda(prenda.getDescripcTipoPrenda());
+        existente.setStock(prenda.getStock());
         existente.setTalla(prenda.getTalla());
         existente.setColor(prenda.getColor());
         existente.setImagen(prenda.getImagen());
