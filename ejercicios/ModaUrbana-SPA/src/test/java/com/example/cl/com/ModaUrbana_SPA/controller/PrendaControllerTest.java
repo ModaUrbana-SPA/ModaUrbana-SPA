@@ -44,6 +44,7 @@ public class PrendaControllerTest {
         prenda.setImagen("MONO_HOODIE_ESTAMPADO.PNG ");
         prenda.setColor("Negro");
         prenda.setTalla("L");
+        prenda.setStock(10);
         prenda.setDescripcTipoPrenda(null); // Asignar un valor válido o null según tu lógica
         prenda.setEstadoPrenda(null); // Asignar un valor válido o null según tu lógica
     }
@@ -61,6 +62,7 @@ public class PrendaControllerTest {
                 .andExpect(jsonPath("$[0].imagen").value("MONO_HOODIE_ESTAMPADO.PNG "))
                 .andExpect(jsonPath("$[0].color").value("Negro"))
                 .andExpect(jsonPath("$[0].talla").value("L"))
+                .andExpect(jsonPath("$[0].stock").value(10))
                 .andExpect(jsonPath("$[0].descripcTipoPrenda").doesNotExist())
                 .andExpect(jsonPath("$[0].estadoPrenda").doesNotExist());
     }
@@ -78,6 +80,7 @@ public class PrendaControllerTest {
                 .andExpect(jsonPath("$.imagen").value("MONO_HOODIE_ESTAMPADO.PNG "))
                 .andExpect(jsonPath("$.color").value("Negro"))
                 .andExpect(jsonPath("$[0].talla").value("L"))
+                .andExpect(jsonPath("$.stock").value(10))
                 .andExpect(jsonPath("$[0].descripcTipoPrenda").doesNotExist())
                 .andExpect(jsonPath("$[0].estadoPrenda").doesNotExist());
     }
@@ -97,6 +100,7 @@ public class PrendaControllerTest {
                 .andExpect(jsonPath("$.imagen").value("MONO_HOODIE_ESTAMPADO.PNG "))
                 .andExpect(jsonPath("$.color").value("Negro"))
                 .andExpect(jsonPath("$.talla").value("L"))
+                .andExpect(jsonPath("$.stock").value(10))
                 .andExpect(jsonPath("$.descripcTipoPrenda").doesNotExist())
                 .andExpect(jsonPath("$.estadoPrenda").doesNotExist());
     }
@@ -116,6 +120,7 @@ public class PrendaControllerTest {
                 .andExpect(jsonPath("$.imagen").value("MONO_HOODIE_ESTAMPADO.PNG "))
                 .andExpect(jsonPath("$.color").value("Negro"))
                 .andExpect(jsonPath("$.talla").value("L"))
+                .andExpect(jsonPath("$.stock").value(10))
                 .andExpect(jsonPath("$.descripcTipoPrenda").doesNotExist())
                 .andExpect(jsonPath("$.estadoPrenda").doesNotExist());
     }

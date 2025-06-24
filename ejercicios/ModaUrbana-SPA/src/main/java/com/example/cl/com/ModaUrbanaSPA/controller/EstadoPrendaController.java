@@ -3,54 +3,42 @@ package com.example.cl.com.ModaUrbanaSPA.controller;
 import com.example.cl.com.ModaUrbanaSPA.model.EstadoPrenda;
 import com.example.cl.com.ModaUrbanaSPA.service.EstadoPrendaService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+@CrossOrigin(origins = "*")
 @RestController
-@RequestMapping("/api/estado-prenda")
+@RequestMapping("/api/estado-prendas")
 public class EstadoPrendaController {
 
     @Autowired
     private EstadoPrendaService estadoPrendaService;
 
     @GetMapping
-    public ResponseEntity<List<EstadoPrenda>> listar() {
-        List<EstadoPrenda> estados = estadoPrendaService.findAll();
-        return ResponseEntity.ok(estados);
+    public List<EstadoPrenda> getAllEstadoPrendas() {
+        return estadoPrendaService.findAll();
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<EstadoPrenda> Buscar(@PathVariable Integer id) {
-        EstadoPrenda estado = estadoPrendaService.findEstadoById(id);
-        return ResponseEntity.ok(estado);
+    public EstadoPrenda getEstadoPrendaById(@PathVariable Integer id) {
+        return estadoPrendaService.findById(id);
     }
 
     @PostMapping
-    public EstadoPrenda createEstado(@RequestBody EstadoPrenda estadoPrenda) {
-        return estadoPrendaService.createEstado(estadoPrenda);
+    public EstadoPrenda createEstadoPrenda(@RequestBody EstadoPrenda estadoPrenda) {
+        return estadoPrendaService.save(estadoPrenda);
     }
 
     @PutMapping("/{id}")
-    public EstadoPrenda updateEstado(@PathVariable Integer id, @RequestBody EstadoPrenda estadoPrenda) {
-        EstadoPrenda existingEstado = estadoPrendaService.findEstadoById(id);
-        if (existingEstado != null) {
-            existingEstado.setEstado(estadoPrenda.getEstado());
-            return estadoPrendaService.createEstado(existingEstado);
-        } else {
-            return null;
-        }
+    public EstadoPrenda updateEstadoPrenda(@PathVariable Integer id, @RequestBody EstadoPrenda estadoPrenda) {
+        estadoPrenda.setId_estado_prenda(id);
+        return estadoPrendaService.save(estadoPrenda);
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteEstado(@PathVariable Integer id) {
-        boolean deleted = estadoPrendaService.deleteById(id);
-        if (deleted) {
-            return ResponseEntity.noContent().build();
-        } else {
-            return ResponseEntity.notFound().build();
-        }
+    public void deleteEstadoPrenda(@PathVariable Integer id) {
+        estadoPrendaService.deleteById(id);
     }
 
 }

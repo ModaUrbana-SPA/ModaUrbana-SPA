@@ -1,7 +1,7 @@
 package com.example.cl.com.ModaUrbanaSPA.service;
 
 import com.example.cl.com.ModaUrbanaSPA.model.EstadoPrenda;
-import com.example.cl.com.ModaUrbanaSPA.repository.EstadoPrendaRepositorio;
+import com.example.cl.com.ModaUrbanaSPA.repository.EstadoPrendaRepositoriy;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import java.util.List;
@@ -11,36 +11,21 @@ import java.util.Optional;
 public class EstadoPrendaService {
 
     @Autowired
-    private EstadoPrendaRepositorio estadoPrendaRepositorio;
+    private EstadoPrendaRepositoriy estadoPrendaRepositorio;
 
     public List<EstadoPrenda> findAll() {
         return estadoPrendaRepositorio.findAll();
     }
 
-    public EstadoPrenda findEstadoById(Integer id) {
-        Optional<EstadoPrenda> estado = estadoPrendaRepositorio.findById(id.longValue());
-        return estado.orElse(null);
+    public EstadoPrenda findById(Integer id) {
+        return estadoPrendaRepositorio.findById(id).orElse(null);
     }
 
-    public EstadoPrenda createEstado(EstadoPrenda estadoPrenda) {
+    public EstadoPrenda save(EstadoPrenda estadoPrenda) {
         return estadoPrendaRepositorio.save(estadoPrenda);
     }
 
-    public EstadoPrenda updateEstado(Integer id, EstadoPrenda estadoPrenda) {
-        if (estadoPrendaRepositorio.existsById(id.longValue())) {
-            estadoPrenda.setId_estado_prenda(id);
-            return estadoPrendaRepositorio.save(estadoPrenda);
-        } else {
-            return null;
-        }
-    }
-
-    public boolean deleteById(Integer id) {
-        if (estadoPrendaRepositorio.existsById(id.longValue())) {
-            estadoPrendaRepositorio.deleteById(id.longValue());
-            return true;
-        } else {
-            return false;
-        }
+    public void deleteById(Integer id) {
+        estadoPrendaRepositorio.deleteById(id);
     }
 }

@@ -5,13 +5,13 @@ import org.springframework.stereotype.Service;
 
 import com.example.cl.com.ModaUrbanaSPA.config.JwtUtil;
 import com.example.cl.com.ModaUrbanaSPA.model.Usuario;
-import com.example.cl.com.ModaUrbanaSPA.repository.UsuarioRepositorio;
+import com.example.cl.com.ModaUrbanaSPA.repository.UsuarioRepositoriy;
 
 @Service
 public class AuthService {
 
     @Autowired
-    private UsuarioRepositorio usuarioRepositorio;
+    private UsuarioRepositoriy usuarioRepositorio;
 
     @Autowired
     private JwtUtil jwtUtil;

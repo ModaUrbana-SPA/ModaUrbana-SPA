@@ -19,7 +19,6 @@ import com.example.cl.com.ModaUrbanaSPA.service.EstadoPrendaService;
 import com.example.cl.com.ModaUrbanaSPA.controller.EstadoPrendaController;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-import java.time.LocalDateTime;
 import org.springframework.http.MediaType;
 
 @WebMvcTest(EstadoPrendaController.class)
@@ -40,7 +39,6 @@ public class EstadoPrendaControllerTest {
     void setUp() {
         estadoPrenda = new EstadoPrenda();
         estadoPrenda.setId_estado_prenda(1);
-        estadoPrenda.setHoraLlegada(LocalDateTime.now());
         estadoPrenda.setEstado("Disponible");
     }
 
@@ -51,44 +49,40 @@ public class EstadoPrendaControllerTest {
         mockMvc.perform(get("/api/estado-prendas"))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$[0].id").value(1))
-                .andExpect(jsonPath("$[0].hora llegada").value(LocalDateTime.now().toString()))
                 .andExpect(jsonPath("$[0].estado").value("Disponible"));
     }
 
     @Test
-    public void testGetEstadoPrendarbyId() throws Exception {
-        when(estadoPrendaService.findEstadoById(1)).thenReturn(estadoPrenda);
+    public void testGetEstadoPrendaById() throws Exception {
+        when(estadoPrendaService.findById(1)).thenReturn(estadoPrenda);
 
-        mockMvc.perform(get("/api/estado-prenda/1"))
+        mockMvc.perform(get("/api/estado-prendas/1"))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$[0].id").value(1))
-                .andExpect(jsonPath("$[0].hora llegada").value(LocalDateTime.now().toString()))
                 .andExpect(jsonPath("$[0].estado").value("Disponible"));
     }
 
     @Test
     public void testCreateEstadoPrenda() throws Exception {
-        when(estadoPrendaService.createEstado(any(EstadoPrenda.class))).thenReturn(estadoPrenda);
+        when(estadoPrendaService.save(any(EstadoPrenda.class))).thenReturn(estadoPrenda);
 
-        mockMvc.perform(post("/api/estado-prenda")
+        mockMvc.perform(post("/api/estado-prendas")
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(objectMapper.writeValueAsString(estadoPrenda)))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$[0].id").value(1))
-                .andExpect(jsonPath("$[0].hora llegada").value(LocalDateTime.now().toString()))
                 .andExpect(jsonPath("$[0].estado").value("Disponible"));
     }
 
     @Test
     public void testUpdateEstadoPrenda() throws Exception {
-        when(estadoPrendaService.createEstado(any(EstadoPrenda.class))).thenReturn(estadoPrenda);
+        when(estadoPrendaService.save(any(EstadoPrenda.class))).thenReturn(estadoPrenda);
 
-        mockMvc.perform(put("/api/estado-prenda/1")
+        mockMvc.perform(put("/api/estado-prendas/1")
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(objectMapper.writeValueAsString(estadoPrenda)))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$[0].id").value(1))
-                .andExpect(jsonPath("$[0].hora llegada").value(LocalDateTime.now().toString()))
                 .andExpect(jsonPath("$[0].estado").value("Disponible"));
     }
 
@@ -96,7 +90,7 @@ public class EstadoPrendaControllerTest {
     public void testDeleteEstado() throws Exception {
         doNothing().when(estadoPrendaService).deleteById(1);
 
-        mockMvc.perform(delete("/api/estado-prenda/1"))
+        mockMvc.perform(delete("/api/estado-prendas/1"))
                 .andExpect(status().isOk());
 
         verify(estadoPrendaService, times(1)).deleteById(1);

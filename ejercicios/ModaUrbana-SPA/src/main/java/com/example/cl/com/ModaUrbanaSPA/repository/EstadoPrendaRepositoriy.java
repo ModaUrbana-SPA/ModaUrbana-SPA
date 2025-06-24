@@ -7,6 +7,6 @@ import org.springframework.stereotype.Repository;
 
 
 @Repository
-public interface EstadoPrendaRepositorio extends JpaRepository<EstadoPrenda, Long> {
-    // Puedes agregar métodos personalizados aquí si los necesitas
+public interface EstadoPrendaRepositoriy extends JpaRepository<EstadoPrenda, Integer> {
+    
 }

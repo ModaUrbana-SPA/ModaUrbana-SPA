@@ -4,7 +4,7 @@ import static org.mockito.Mockito.*;
 import static org.junit.jupiter.api.Assertions.*;
 
 import com.example.cl.com.ModaUrbanaSPA.model.TipoPrenda;
-import com.example.cl.com.ModaUrbanaSPA.repository.TipoPrendaRepositorio;
+import com.example.cl.com.ModaUrbanaSPA.repository.TipoPrendaRepositoriy;
 import com.example.cl.com.ModaUrbanaSPA.service.TipoPrendaService;
 
 import org.junit.jupiter.api.Test;
@@ -22,7 +22,7 @@ public class TipoPrendaServiceTest {
     private TipoPrendaService tipoPrendaService;
 
     @MockBean
-    private TipoPrendaRepositorio tipoPrendaRepositorio;
+    private TipoPrendaRepositoriy tipoPrendaRepositorio;
 
     @Test
     public void testFindAll() {

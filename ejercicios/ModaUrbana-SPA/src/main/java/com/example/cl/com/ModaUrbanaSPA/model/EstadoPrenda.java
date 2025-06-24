@@ -12,7 +12,6 @@ public class EstadoPrenda {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id_estado_prenda")
     private Integer id_estado_prenda;
 
     @Column(length = 50, nullable = false)

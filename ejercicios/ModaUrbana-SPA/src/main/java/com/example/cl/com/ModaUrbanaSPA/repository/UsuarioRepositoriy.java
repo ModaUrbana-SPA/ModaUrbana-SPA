@@ -6,7 +6,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import com.example.cl.com.ModaUrbanaSPA.model.Usuario;
 
-public interface UsuarioRepositorio extends JpaRepository<Usuario, Long> {
+public interface UsuarioRepositoriy extends JpaRepository<Usuario, Long> {
     Optional<Usuario> findByNombreUsuario(String nombreUsuario);
-
 }

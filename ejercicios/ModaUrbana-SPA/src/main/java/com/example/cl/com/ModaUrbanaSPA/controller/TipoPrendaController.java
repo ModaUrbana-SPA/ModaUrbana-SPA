@@ -9,7 +9,7 @@ import java.util.List;
 
 @CrossOrigin(origins = "*")
 @RestController
-@RequestMapping("/api/tipo-prenda")
+@RequestMapping("/api/tipo-prendas")
 public class TipoPrendaController {
 
     @Autowired

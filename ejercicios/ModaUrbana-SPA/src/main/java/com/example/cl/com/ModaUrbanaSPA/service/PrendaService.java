@@ -6,13 +6,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.example.cl.com.ModaUrbanaSPA.model.Prenda;
-import com.example.cl.com.ModaUrbanaSPA.repository.PrendaRepositorio;
+import com.example.cl.com.ModaUrbanaSPA.repository.PrendaRepositoriy;
 
 @Service
 public class PrendaService {
 
     @Autowired
-    private PrendaRepositorio prendaRepository;
+    private PrendaRepositoriy prendaRepository;
 
     public List<Prenda> findAll() {
         return prendaRepository.findAll();
