@@ -10,22 +10,22 @@ import java.util.List;
 @Service
 public class TipoPrendaService {
     @Autowired
-    private TipoPrendaRepositoriy tipoPrendaRepositorio;
+    private TipoPrendaRepositoriy tipoPrendaRepository;
 
     public List<TipoPrenda> findAll() {
-        return tipoPrendaRepositorio.findAll();
+        return tipoPrendaRepository.findAll();
     }
 
     public TipoPrenda findById(Integer id) {
-        return tipoPrendaRepositorio.findById(id).orElse(null);
+        return tipoPrendaRepository.findById(id).orElse(null);
     }
 
     public TipoPrenda save(TipoPrenda tipoPrenda) {
-        return tipoPrendaRepositorio.save(tipoPrenda);
+        return tipoPrendaRepository.save(tipoPrenda);
     }
 
     public void deleteById(Integer id) {
-        tipoPrendaRepositorio.deleteById(id);
+        tipoPrendaRepository.deleteById(id);
     }
 }
 

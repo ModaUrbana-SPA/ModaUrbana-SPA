@@ -11,14 +11,14 @@ import com.example.cl.com.ModaUrbanaSPA.repository.UsuarioRepositoriy;
 public class AuthService {
 
     @Autowired
-    private UsuarioRepositoriy usuarioRepositorio;
+    private UsuarioRepositoriy usuarioRepository;
 
     @Autowired
     private JwtUtil jwtUtil;
 
     public String login(String nombreUsuario, String contraseña) {
         // buscando un usuario por su nombre de usuario
-        Usuario usuario = usuarioRepositorio.findByNombreUsuario(nombreUsuario)
+        Usuario usuario = usuarioRepository.findByNombreUsuario(nombreUsuario)
                 .orElseThrow(() -> new RuntimeException("Usuario no encontrado"));
 
         // verificando si la contraseña proporcionada coincide con la almacenada

@@ -22,11 +22,11 @@ public class TipoPrendaServiceTest {
     private TipoPrendaService tipoPrendaService;
 
     @MockBean
-    private TipoPrendaRepositoriy tipoPrendaRepositorio;
+    private TipoPrendaRepositoriy tipoPrendaRepository;
 
     @Test
     public void testFindAll() {
-        when(tipoPrendaRepositorio.findAll()).thenReturn(List.of(new TipoPrenda(1, "Camisas", "Tipos de camisas formales y casuales")));
+        when(tipoPrendaRepository.findAll()).thenReturn(List.of(new TipoPrenda(1, "Camisas", "Tipos de camisas formales y casuales")));
 
         List<TipoPrenda> tipos = tipoPrendaService.findAll();
         assertNotNull(tipos);
@@ -37,7 +37,7 @@ public class TipoPrendaServiceTest {
     public void testFindById() {
         Integer id = 1;
         TipoPrenda tipoPrenda = new TipoPrenda(id, "Camisas", "Tipos de camisas formales y casuales");
-        when(tipoPrendaRepositorio.findById(id)).thenReturn(Optional.of(tipoPrenda));
+        when(tipoPrendaRepository.findById(id)).thenReturn(Optional.of(tipoPrenda));
 
         TipoPrenda found = tipoPrendaService.findById(id);
         assertNotNull(found);
@@ -47,7 +47,7 @@ public class TipoPrendaServiceTest {
     @Test
     public void testSave() {
         TipoPrenda tipoPrenda = new TipoPrenda(1, "Camisas", "Tipos de camisas formales y casuales");
-        when(tipoPrendaRepositorio.save(tipoPrenda)).thenReturn(tipoPrenda);
+        when(tipoPrendaRepository.save(tipoPrenda)).thenReturn(tipoPrenda);
 
         TipoPrenda saved = tipoPrendaService.save(tipoPrenda);
         assertNotNull(saved);
@@ -57,9 +57,9 @@ public class TipoPrendaServiceTest {
     @Test
     public void testDeleteById() {
         Integer id = 1;
-        doNothing().when(tipoPrendaRepositorio).deleteById(id);
+        doNothing().when(tipoPrendaRepository).deleteById(id);
 
         tipoPrendaService.deleteById(id);
-        verify(tipoPrendaRepositorio, times(1)).deleteById(id);
+        verify(tipoPrendaRepository, times(1)).deleteById(id);
     }
 }
