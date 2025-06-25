@@ -5,5 +5,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface PrendaRepositoriy extends JpaRepository<Prenda, Integer> {
+public interface PrendaRepository extends JpaRepository<Prenda, Integer> {
 }

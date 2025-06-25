@@ -5,20 +5,20 @@ import org.springframework.stereotype.Service;
 
 import com.example.cl.com.ModaUrbanaSPA.config.JwtUtil;
 import com.example.cl.com.ModaUrbanaSPA.model.Usuario;
-import com.example.cl.com.ModaUrbanaSPA.repository.UsuarioRepositoriy;
+import com.example.cl.com.ModaUrbanaSPA.repository.UsuarioRepository;
 
 @Service
 public class AuthService {
 
     @Autowired
-    private UsuarioRepositoriy usuarioRepository;
+    private UsuarioRepository usuarioRepositorio;
 
     @Autowired
     private JwtUtil jwtUtil;
 
     public String login(String nombreUsuario, String contraseña) {
         // buscando un usuario por su nombre de usuario
-        Usuario usuario = usuarioRepository.findByNombreUsuario(nombreUsuario)
+        Usuario usuario = usuarioRepositorio.findByNombreUsuario(nombreUsuario)
                 .orElseThrow(() -> new RuntimeException("Usuario no encontrado"));
 
         // verificando si la contraseña proporcionada coincide con la almacenada

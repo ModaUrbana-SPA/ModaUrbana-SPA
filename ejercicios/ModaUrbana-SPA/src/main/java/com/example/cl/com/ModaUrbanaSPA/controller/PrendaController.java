@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.*;
 import com.example.cl.com.ModaUrbanaSPA.model.Prenda;
 import com.example.cl.com.ModaUrbanaSPA.service.PrendaService;
 
-@CrossOrigin(origins = "*")
 @RestController
 @RequestMapping("/api/prendas")
 public class PrendaController {
@@ -38,7 +37,7 @@ public class PrendaController {
             Prenda nuevaPrenda = prendaService.save(prenda);
             return ResponseEntity.status(HttpStatus.CREATED).body(nuevaPrenda);
         } catch (Exception e) {
-            e.printStackTrace();
+            e.printStackTrace(); // Esto mostrará la causa del error en consola
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
                     .body("Error al guardar prenda: " + e.getMessage());
         }

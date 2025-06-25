@@ -1,33 +1,32 @@
-package com.example.cl.com.ModaUrbana_SPA.service;
+package com.example.cl.com.ModaUrbanaSPA.service;
 
 import static org.mockito.Mockito.*;
 import static org.junit.jupiter.api.Assertions.*;
-
 import com.example.cl.com.ModaUrbanaSPA.model.EstadoPrenda;
-import com.example.cl.com.ModaUrbanaSPA.repository.EstadoPrendaRepositoriy;
-import com.example.cl.com.ModaUrbanaSPA.service.EstadoPrendaService;
-
+import com.example.cl.com.ModaUrbanaSPA.repository.EstadoPrendaRepository;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
-
+import org.springframework.test.context.ActiveProfiles;
 import java.util.List;
 import java.util.Optional;
 
 @SpringBootTest
+@ActiveProfiles("test")
+
 public class EstadoPrendaServiceTest {
 
     @Autowired
     private EstadoPrendaService estadoPrendaService;
 
     @MockBean
-    private EstadoPrendaRepositoriy estadoPrendaRepository;
+    private EstadoPrendaRepository estadoPrendaRepositorio;
 
     // Listar todos los estados
     @Test
     public void testFindAll() {
-        when(estadoPrendaRepository.findAll()).thenReturn(List.of(new EstadoPrenda(1, "Disponible")));
+        when(estadoPrendaRepositorio.findAll()).thenReturn(List.of(new EstadoPrenda(1, "Disponible")));
 
         List<EstadoPrenda> estados = estadoPrendaService.findAll();
         assertNotNull(estados);
@@ -39,7 +38,7 @@ public class EstadoPrendaServiceTest {
     public void testFindById() {
         Integer id = 1;
         EstadoPrenda estado = new EstadoPrenda(id, "En tránsito");
-        when(estadoPrendaRepository.findById(id)).thenReturn(Optional.of(estado));
+        when(estadoPrendaRepositorio.findById(id)).thenReturn(Optional.of(estado));
 
         EstadoPrenda found = estadoPrendaService.findById(id);
         assertNotNull(found);
@@ -50,7 +49,7 @@ public class EstadoPrendaServiceTest {
     @Test
     public void testSave() {
         EstadoPrenda estado = new EstadoPrenda(1, "En bodega");
-        when(estadoPrendaRepository.save(estado)).thenReturn(estado);
+        when(estadoPrendaRepositorio.save(estado)).thenReturn(estado);
 
         EstadoPrenda saved = estadoPrendaService.save(estado);
         assertNotNull(saved);
@@ -61,10 +60,10 @@ public class EstadoPrendaServiceTest {
     @Test
     public void testDeleteById() {
         Integer id = 1;
-        doNothing().when(estadoPrendaRepository).deleteById(id);
+        doNothing().when(estadoPrendaRepositorio).deleteById(id);
 
         estadoPrendaService.deleteById(id);
-        verify(estadoPrendaRepository, times(1)).deleteById(id);
+        verify(estadoPrendaRepositorio, times(1)).deleteById(id);
     }
 
 }

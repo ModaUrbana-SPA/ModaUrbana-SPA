@@ -1,7 +1,7 @@
 package com.example.cl.com.ModaUrbanaSPA.controller;
 
 import com.example.cl.com.ModaUrbanaSPA.model.Usuario;
-import com.example.cl.com.ModaUrbanaSPA.repository.UsuarioRepositoriy;
+import com.example.cl.com.ModaUrbanaSPA.repository.UsuarioRepository;
 
 import java.util.List;
 
@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.*;
 public class UsuarioController {
 
     @Autowired
-    private UsuarioRepositoriy usuarioRepositorio;
+    private UsuarioRepository usuarioRepositorio;
 
     @PostMapping
     public Usuario crearUsuario(@RequestBody Usuario usuario) {

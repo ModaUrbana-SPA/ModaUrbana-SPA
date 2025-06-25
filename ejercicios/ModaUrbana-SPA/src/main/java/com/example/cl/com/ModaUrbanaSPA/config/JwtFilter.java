@@ -36,7 +36,7 @@ public class JwtFilter extends OncePerRequestFilter {
         String path = request.getRequestURI();
         System.out.println("Ruta interceptada por JwtFilter: " + path);
 
-        if (path.startsWith("/api/auth")) {
+        if (path.startsWith("/api/auth/login")) {
             System.out.println(" Login o auth libre, no se aplica filtro");
             filterChain.doFilter(request, response);
             return;
